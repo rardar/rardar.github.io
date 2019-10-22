@@ -88,13 +88,13 @@
 
 <meta name="keywords" content="SQL注入">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL注入">
-<meta property="og:url" content="http://yoursite.com/2019/10/15/SQL注入(1)/index.html">
+<meta property="og:title" content="SQLMAP">
+<meta property="og:url" content="http://yoursite.com/2019/10/15/SQLMAP/index.html">
 <meta property="og:site_name" content="信息安全">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-15T16:11:57.742Z">
+<meta property="og:updated_time" content="2019-10-19T00:35:26.783Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SQL注入">
+<meta name="twitter:title" content="SQLMAP">
 
 
 
@@ -124,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/10/15/SQL注入(1)/">
+  <link rel="canonical" href="http://yoursite.com/2019/10/15/SQLMAP/">
 
 
 
 
 
-  <title>SQL注入 | 信息安全</title>
+  <title>SQLMAP | 信息安全</title>
   
 
 
@@ -299,7 +299,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/15/SQL注入(1)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/15/SQLMAP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Rardar">
@@ -316,7 +316,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">SQL注入</h1>
+          <h1 class="post-title" itemprop="name headline">SQLMAP</h1>
         
 
         <div class="post-meta">
@@ -382,7 +382,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  656
+                  894
                 </span>
               
 
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  2
+                  3
                 </span>
               
             </div>
@@ -421,93 +421,269 @@
       
         <hr>
 <a id="more"></a>
-<h2 id="SQL盲注"><a href="#SQL盲注" class="headerlink" title="SQL盲注"></a>SQL盲注</h2><blockquote>
-<p>1’ and length(database())&gt;7–+</p>
+
+<h3 id="SqlMap介绍及分析"><a href="#SqlMap介绍及分析" class="headerlink" title="SqlMap介绍及分析"></a>SqlMap介绍及分析</h3><blockquote>
+<p>SQLMAP是一种开源渗透测试工具，可自动执行SQL注入缺陷的检测和开发过程，并接管数据库服务器。它有强大的检测引擎,针对不同类型的数据库提供多样的渗透测试功能选项，实现数据库识别、数据获取、访问DBMS\操作系统甚至通过带外数据连接的方式执行操作系统的命令。，以及从数据库指纹识别、从数据库获取数据、访问底层文件的广泛范围的交换机通过带外连接在操作系统上执行命令.</p>
 </blockquote>
 <blockquote>
-<p>1’ and ascii(left(database(),1))&gt;122 115 s</p>
+<p>SQLMAP支持的数据包括：MySQL, Oracle,PostgreSQL,Microsoft SQL Server, Microsoft Access, IBM DB2, SQLite, Firebird,Sybase和SAP MaxDB等数据库。</p>
 </blockquote>
-<h3 id="sql-mid-函数"><a href="#sql-mid-函数" class="headerlink" title="sql mid 函数"></a>sql mid 函数</h3><p>sql left<br>sql sleep<br>1’ and if(ascii(left(database(),1))=115,sleep(5),1)–+</p>
-<h3 id="sql-注入原理"><a href="#sql-注入原理" class="headerlink" title="sql 注入原理"></a>sql 注入原理</h3><h3 id="SQL注入危害"><a href="#SQL注入危害" class="headerlink" title="SQL注入危害"></a>SQL注入危害</h3><ol>
-<li>数据库信息泄漏：数据库中存放的用户的隐私信息的泄露。<br>网页篡改：通过操作数据库对特定网页进行篡改。<br>网站被挂马，传播恶意软件：修改数据库一些字段的值，嵌入网马链接，进行挂马攻击。<br>数据库被恶意操作：数据库服务器被攻击，数据库的系统管理员帐户被窜改。<br>服务器被远程控制，被安装后门。经由数据库服务器提供的操作系统支持，让黑客得以修改或控制操作系统。<br>破坏硬盘数据，瘫痪全系统。<br>一些类型的数据库系统能够让SQL指令操作文件系统，这使得SQL注入的危害被进一步放大</li>
-</ol>
-<h3 id="sql-注入分类"><a href="#sql-注入分类" class="headerlink" title="sql 注入分类"></a>sql 注入分类</h3><ul>
-<li><ol>
-<li>注入点类型 数值型 字符型</li>
-</ol>
-</li>
-<li><ol start="2">
-<li>注入点位置（get注入，post注入，cookie注入，搜索型注入，http头注入）</li>
-</ol>
-</li>
-<li><ol start="3">
-<li>页面回显（报错注入，布尔盲注，时间盲注）</li>
-</ol>
-</li>
-<li><ol>
-<li>按照页面有无回显。<h3 id="sql-注入的位置"><a href="#sql-注入的位置" class="headerlink" title="sql 注入的位置"></a>sql 注入的位置</h3></li>
-</ol>
-</li>
-<li><p>登录框  </p>
-</li>
-<li><p>搜索框 </p>
-</li>
-<li><p>url参数值get </p>
-</li>
-<li><p>url参数值post </p>
-</li>
-<li><p>信息设置</p>
-</li>
-</ul>
-<h3 id="sql注入判断依据"><a href="#sql注入判断依据" class="headerlink" title="sql注入判断依据"></a>sql注入判断依据</h3><ul>
-<li>sql注入漏洞挖掘方式   </li>
-<li>使用工具safe3wvs webCruiser appscan awvs  手工测试</li>
-<li>value+0 -0 *1 /1</li>
-<li>1 or 1=1    1)or(1=1</li>
-<li>数字型——内联sql注入</li>
-</ul>
-<h3 id="测试语句"><a href="#测试语句" class="headerlink" title="测试语句"></a>测试语句</h3><ul>
-<li><p>数字型 字符型</p>
-</li>
-<li><p>and 1=1/and 1=2 and ‘1’=’1 and ‘1’=’2<br>…..</p>
-</li>
-<li><p>数据库的比较运算符  1&lt;2 真  2&lt;1 假   数字 数字</p>
-</li>
-<li><p>数字 与字符 串   1’ and’nima’&gt;’0  存在  1’ and’nima’=’0  1’ and’nima’=’1 不存在</p>
-</li>
-<li><p>字符串 与 字符串 比较    a 97  65 A  ‘a’&lt;’b’   1’ and’nima’=’nima</p>
-<h3 id="数据库注释"><a href="#数据库注释" class="headerlink" title="数据库注释"></a>数据库注释</h3></li>
-<li><input checked disabled type="checkbox"> <p>sql server和oracle  </p>
-</li>
-</ul>
-<ol>
-<li>–</li>
-<li>/* */</li>
-</ol>
+<p>SQLMAP目前支持的注入方式包括（默认全进行）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">B: Boolean-based blind SQL injection（布尔型注入）</span><br><span class="line">E: Error-based SQL injection（报错型注入）</span><br><span class="line">U: UNION query SQL injection（可联合查询注入）</span><br><span class="line">S: Stacked queries SQL injection（可多语句查询注入）</span><br><span class="line">T: Time-based blind SQL injection（基于时间延迟注入）</span><br><span class="line"> Q: Inline SQL Injection  (内联注入)</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><input checked disabled type="checkbox"> mysql</li>
-<li>/*  */ – #</li>
-<li>1’ or 1=1 order by 3– </li>
-<li>1’ union select 1,1#</li>
-<li>1’/<em>!union</em>/ /<em>!select <em>/ 1,1#  注释非 /</em>！</em>/</li>
-<li>1’ /<em>!5553,union</em>//*!5553,select */1,1#</li>
-<li>access sqlite asp</li>
-<li>mssql mysql oracle php jsp</li>
-<li>and (select count(*) from jishi)&gt;0</li>
-<li>len(url)  asc(mid(bianliang,3,1))</li>
-<li>sql mid</li>
-<li>sleep()</li>
-<li>benchmark()禁止使用</li>
-<li>select benchmark <h3 id="MYSQL延迟注入"><a href="#MYSQL延迟注入" class="headerlink" title="MYSQL延迟注入"></a>MYSQL延迟注入</h3></li>
-<li>延迟注入是通过页面返回的时间来判断的</li>
-<li>不同的mysql数据库版本延迟注入的语句也不同</li>
-<li>mysql &gt;= 5.0 的可以使用sleep()进行查询</li>
-<li>mysql &lt; 5.0 可以使用benchmark()进行查询</li>
-<li>benchark()的用法</li>
-<li>benchark(n,sql语句)n为查询次数</li>
-<li>通常查询时间的增多返回时间变得缓慢来判断是否存在延迟注入</li>
-<li>select benchark(1000,select * from admin)</li>
+<li><p>SQLMAP分析：</p>
+<p>SQLMAP的功能模块参数由几大类构成（见下表），分别是： </p>
+<table>
+<thead>
+<tr>
+<th>Target:At least one of these options has to be provided to define the target(s)</th>
+<th>目标：至少为目标提供一个选项</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Request:These options can be used to specify how to connect to the target URL</td>
+<td>请求：这些选项用于指定如何连接目标URL的方法</td>
+</tr>
+<tr>
+<td>Optimization:These options can be used to optimize the performance of sqlmap</td>
+<td>优化：这些选项用来优化sqlmap的性能</td>
+</tr>
+<tr>
+<td>Injection:These options can be used to specify which parameters to test for,</td>
+<td>注入：这些选项用于指定测试那些参数，提供注入payload和篡改脚本</td>
+</tr>
+<tr>
+<td>Detection:These options can be used to customize the detection phase</td>
+<td>侦测：这些选项用于侦测阶段的定制化</td>
+</tr>
+<tr>
+<td>Techniques:These options can be used to tweak testing of specific SQL injection techniques</td>
+<td>技巧：这些选项用于调整特定sql注入技术的技巧</td>
+</tr>
+<tr>
+<td>Enumeration:These options can be used to enumerate the back-end database management system information, structure and data contained in the tables. Moreover you can run your own SQL statements</td>
+<td>枚举：这些选项可用于枚举后端数据库管理系统信息、表里的数据接口，此外还可以运行你的sql语句</td>
+</tr>
+<tr>
+<td>Brute force:These options can be used to run brute force checks</td>
+<td>暴力执行：这些选项用于暴力检查</td>
+</tr>
+<tr>
+<td>User-defined function injection:These options can be used to create custom user-defined functions</td>
+<td>用户定义注入函数:这些选项用于建立用户定义函数</td>
+</tr>
+<tr>
+<td>File system access:These options can be used to access the back-end database management system underlying file system</td>
+<td>访问文件系统：这些选项用于访问后端数据库管理系统的底层文件系统</td>
+</tr>
+<tr>
+<td>Operating system access:These options can be used to access the back-end database management system underlying operating system</td>
+<td>操作系统连接：这些选项用于连接后端DBMS底层的os</td>
+</tr>
+<tr>
+<td>Windows registry access:These options can be used to access the back-end database management system Windows registry</td>
+<td>windows 注册表连接：这些选项用于连接后端DBMS的windows 注册表</td>
+</tr>
+<tr>
+<td>General: These options can be used to set some general working parameters</td>
+<td>通用：这些选项用于设置一些通用参数</td>
+</tr>
+</tbody></table>
+<p>SQLMAP下载及学习地址：</p>
+<p> 下载：.tar.gz或者.zip</p>
+</li>
 </ul>
+<p>Homepage: <a href="http://sqlmap.org/" target="_blank" rel="noopener">http://sqlmap.org</a> </p>
+<p><strong>CommitsRSS学习地址：</strong></p>
+<p><strong>feed:</strong><a href="https://github.com/sqlmapproject/sqlmap/commits/master.atom" target="_blank" rel="noopener">https://github.com/sqlmapproject/sqlmap/commits/master.atom</a></p>
+<p><strong>Issue tracker:</strong><a href="https://github.com/sqlmapproject/sqlmap/issues" target="_blank" rel="noopener">https://github.com/sqlmapproject/sqlmap/issues</a></p>
+<p><strong>User’s manual:</strong><a href="https://github.com/sqlmapproject/sqlmap/wiki" target="_blank" rel="noopener">https://github.com/sqlmapproject/sqlmap/wiki</a></p>
+<p><strong>(FAQ):</strong><a href="https://github.com/sqlmapproject/sqlmap/wiki/FAQ" target="_blank" rel="noopener">https://github.com/sqlmapproject/sqlmap/wiki/FAQ</a></p>
+<p><strong>Twitter:</strong>@sqlmap</p>
+<p><strong>Demos:</strong><a href="http://www.youtube.com/user/inquisb/videos" target="_blank" rel="noopener">http://www.youtube.com/user/inquisb/videos</a></p>
+<p><strong>Screenshots:</strong><a href="https://github.com/sqlmapproject/sqlmap/wiki/Screenshots" target="_blank" rel="noopener">https://github.com/sqlmapproject/sqlmap/wiki/Screenshots</a></p>
+<h3 id="Sqlmap使用经验总结"><a href="#Sqlmap使用经验总结" class="headerlink" title="Sqlmap使用经验总结"></a>Sqlmap使用经验总结</h3><p> 以下参数在进行SQL注入时配置恰当会使得注入攻击事半功倍。 </p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="Sqlmap实操语句"><a href="#Sqlmap实操语句" class="headerlink" title="Sqlmap实操语句"></a>Sqlmap实操语句</h3><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
 
       
     </div>
@@ -572,8 +748,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/10/15/SQL注入/" rel="next" title="SQL注入">
-                <i class="fa fa-chevron-left"></i> SQL注入
+              <a href="/2019/10/15/XSS（跨站脚本攻击）/" rel="next" title="XSS（跨站脚本攻击）">
+                <i class="fa fa-chevron-left"></i> XSS（跨站脚本攻击）
               </a>
             
           </div>
@@ -581,6 +757,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/16/Web安全 _CSRF漏洞/" rel="prev" title="Web安全_CSRF漏洞">
+                Web安全_CSRF漏洞 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -666,7 +846,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -761,7 +941,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL盲注"><span class="nav-number">1.</span> <span class="nav-text">SQL盲注</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sql-mid-函数"><span class="nav-number">1.1.</span> <span class="nav-text">sql mid 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sql-注入原理"><span class="nav-number">1.2.</span> <span class="nav-text">sql 注入原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL注入危害"><span class="nav-number">1.3.</span> <span class="nav-text">SQL注入危害</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sql-注入分类"><span class="nav-number">1.4.</span> <span class="nav-text">sql 注入分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sql-注入的位置"><span class="nav-number">1.5.</span> <span class="nav-text">sql 注入的位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sql注入判断依据"><span class="nav-number">1.6.</span> <span class="nav-text">sql注入判断依据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试语句"><span class="nav-number">1.7.</span> <span class="nav-text">测试语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库注释"><span class="nav-number">1.8.</span> <span class="nav-text">数据库注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MYSQL延迟注入"><span class="nav-number">1.9.</span> <span class="nav-text">MYSQL延迟注入</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#SqlMap介绍及分析"><span class="nav-number">1.</span> <span class="nav-text">SqlMap介绍及分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sqlmap使用经验总结"><span class="nav-number">2.</span> <span class="nav-text">Sqlmap使用经验总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sqlmap实操语句"><span class="nav-number">3.</span> <span class="nav-text">Sqlmap实操语句</span></a></li></ol></div>
             
 
           </div>
@@ -813,7 +993,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共1.4k字</span>
+  <span class="post-count">博客全站共8.2k字</span>
 </div>
         
 

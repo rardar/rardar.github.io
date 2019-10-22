@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="CSRF,">
 
 
 
@@ -86,17 +86,24 @@
 
 
 
-<meta name="description" content="八佰伴">
-<meta name="keywords" content="山椒大夫">
-<meta property="og:type" content="website">
-<meta property="og:title" content="信息安全">
-<meta property="og:url" content="http://yoursite.com/categories/搭建博客/index.html">
+<meta name="keywords" content="CSRF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web安全_CSRF漏洞">
+<meta property="og:url" content="http://yoursite.com/2019/10/16/Web安全 _CSRF漏洞/index.html">
 <meta property="og:site_name" content="信息安全">
-<meta property="og:description" content="八佰伴">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="c:%5CUsers%5C%E5%AD%99%E8%85%BE%E9%A3%9E%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1571714230372.png">
+<meta property="og:image" content="c:%5CUsers%5C%E5%AD%99%E8%85%BE%E9%A3%9E%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1571714334699.png">
+<meta property="og:image" content="c:/Users/孙腾飞/AppData/Roaming/Typora/typora-user-images/1571714427682.png">
+<meta property="og:image" content="c:%5CUsers%5C%E5%AD%99%E8%85%BE%E9%A3%9E%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1571714517082.png">
+<meta property="og:image" content="c:%5CUsers%5C%E5%AD%99%E8%85%BE%E9%A3%9E%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1571714756085.png">
+<meta property="og:image" content="c:%5CUsers%5C%E5%AD%99%E8%85%BE%E9%A3%9E%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1571714850017.png">
+<meta property="og:image" content="c:%5CUsers%5C%E5%AD%99%E8%85%BE%E9%A3%9E%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1571714874056.png">
+<meta property="og:image" content="c:%5CUsers%5C%E5%AD%99%E8%85%BE%E9%A3%9E%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1571714893477.png">
+<meta property="og:updated_time" content="2019-10-22T03:30:11.312Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="信息安全">
-<meta name="twitter:description" content="八佰伴">
+<meta name="twitter:title" content="Web安全_CSRF漏洞">
+<meta name="twitter:image" content="c:%5CUsers%5C%E5%AD%99%E8%85%BE%E9%A3%9E%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1571714230372.png">
 
 
 
@@ -126,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/搭建博客/">
+  <link rel="canonical" href="http://yoursite.com/2019/10/16/Web安全 _CSRF漏洞/">
 
 
 
 
 
-  <title>Category: 搭建博客 | 信息安全</title>
+  <title>Web安全_CSRF漏洞 | 信息安全</title>
   
 
 
@@ -151,7 +158,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -287,105 +294,270 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block category">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>搭建博客<small>Category</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/16/Web安全 _CSRF漏洞/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rardar">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="信息安全">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/10/14/my-first-blog(2)/" itemprop="url">
-              
-                <span itemprop="name">my-first-blog</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Web安全_CSRF漏洞</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-10-14T13:00:07+08:00" content="2019-10-14">
-          10-14
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-16T10:11:23+08:00">
+                2019-10-16
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/渗透测试/" itemprop="url" rel="index">
+                    <span itemprop="name">渗透测试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  904
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/10/14/my-first-blog(1)/" itemprop="url">
-              
-                <span itemprop="name">my-first-blog</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-10-14T13:00:07+08:00" content="2019-10-14">
-          10-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
+        <hr>
+<a id="more"></a>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/10/14/my-first-blog/" itemprop="url">
-              
-                <span itemprop="name">my-first-blog</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-10-14T13:00:07+08:00" content="2019-10-14">
-          10-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+<h6 id="csrf这个漏洞与xss漏洞的恩怨情仇，别看这两个漏洞只差几个字符，但他们的区别可是天差地别。"><a href="#csrf这个漏洞与xss漏洞的恩怨情仇，别看这两个漏洞只差几个字符，但他们的区别可是天差地别。" class="headerlink" title="csrf这个漏洞与xss漏洞的恩怨情仇，别看这两个漏洞只差几个字符，但他们的区别可是天差地别。"></a>csrf这个漏洞与xss漏洞的恩怨情仇，别看这两个漏洞只差几个字符，但他们的区别可是天差地别。</h6><h3 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h3><p>今天继续给大家讲前端漏洞，今天介绍的是csrf这个漏洞与xss漏洞的恩怨情仇，别看这两个漏洞只差几个字符，但他们的区别可是天差地别。</p>
+<h3 id="Csrf漏洞"><a href="#Csrf漏洞" class="headerlink" title="Csrf漏洞"></a>Csrf漏洞</h3><p><strong>CSRF</strong>（Cross-site request forgery）跨站请求伪造：也被称为“One Click Attack”或者Session Riding，通常缩写为CSRF或者XSRF，是一种对网站的恶意利用。尽管听起来像跨站脚本（XSS），但它与XSS非常不同，XSS利用站点内的信任用户，而CSRF则通过伪装来自受信任用户的请求来利用受信任的网站。与XSS攻击相比，CSRF攻击往往不大流行（因此对其进行防范的资源也相当稀少）和难以防范，所以被认为比XSS更具危险性。</p>
+<h3 id="Csrf漏洞分析"><a href="#Csrf漏洞分析" class="headerlink" title="Csrf漏洞分析"></a>Csrf漏洞分析</h3><h4 id="成因"><a href="#成因" class="headerlink" title="成因"></a>成因</h4><p>其实说白了，csrf漏洞的成因就是网站的cookie在浏览器中不会过期，只要不关闭浏览器或者退出登录，那以后只要是访问这个网站，都会默认你已经登录的状态。而在这个期间，攻击者发送了构造好的csrf脚本或包含csrf脚本的链接，可能会执行一些用户不想做的功能（比如是添加账号等）。这个操作不是用户真正想要执行的。</p>
+<h4 id="危害"><a href="#危害" class="headerlink" title="危害"></a>危害</h4><p>攻击者盗用了你的身份，以你的名义发送恶意请求。CSRF能够做的事情包括：以你名义发送邮件，发消息，盗取你的账号，甚至于购买商品，虚拟货币转账……造成的问题包括：个人隐私泄露以及财产安全。</p>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>首先找到一个目标站点，csrf存在的危害主要存在于可以执行操作的地方，那么我在我搭建的一个环境中的登录后页面进行测试</p>
+<p><img src="C:%5CUsers%5C%E5%AD%99%E8%85%BE%E9%A3%9E%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1571714230372.png" alt="1571714230372"></p>
+<p> 环境就是一个wordpress的环境，可以直接去官网下载<br> 我们选择用户界面进行测试，可以看到现在只有一个用户 </p>
+<pre><code>![1571714296992](C:\Users\孙腾飞\AppData\Roaming\Typora\typora-user-images\1571714296992.png)</code></pre><p> 下面添加用户 </p>
+<p>​          <img src="C:%5CUsers%5C%E5%AD%99%E8%85%BE%E9%A3%9E%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1571714334699.png" alt="1571714334699"></p>
+<p> 利用burp进行截断    <img src="C:\Users\孙腾飞\AppData\Roaming\Typora\typora-user-images\1571714427682.png" alt="1571714427682"></p>
+<p> 利用burp的自带插件来利用csrf </p>
+<p><img src="C:%5CUsers%5C%E5%AD%99%E8%85%BE%E9%A3%9E%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1571714517082.png" alt="1571714517082"></p>
+<p>会生成一个可以利用csrf.html<br>修改标注内的值，来保证添加的用户不会重复造成无法添加 </p>
+<p><img src="C:%5CUsers%5C%E5%AD%99%E8%85%BE%E9%A3%9E%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1571714756085.png" alt="1571714756085"></p>
+<p> 在浏览器中尝试</p>
+<p>​              <img src="C:%5CUsers%5C%E5%AD%99%E8%85%BE%E9%A3%9E%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1571714850017.png" alt="1571714850017"></p>
+<p> 执行按键，发现除了本来存在的第一个用户和我们通过正常手段加入的用户双增加了一个新的test1用户，这个用户就是我们利用csrf点击图片中的submit来执行的操作，因为是我们的测试没有对页面进行修改和直接触发，如果是攻击者利用JS来让用户进行直接的触发，只要打开了相应的页面就会执行这一行为。 </p>
+<p>​          <img src="C:%5CUsers%5C%E5%AD%99%E8%85%BE%E9%A3%9E%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1571714874056.png" alt="1571714874056"></p>
+<p>​          <img src="C:%5CUsers%5C%E5%AD%99%E8%85%BE%E9%A3%9E%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1571714893477.png" alt="1571714893477"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>漏洞依靠用户标识危害网站，利用网站对用户标识的信任，欺骗用户的浏览器发送HTTP请求给目标站点，另外可以通过IMG标签会触发一个GET请求，可以利用它来实现CSRF攻击。<br>CSRF攻击依赖下面的假定：</p>
+<ul>
+<li>攻击者了解受害者所在的站点</li>
+<li>攻击者的目标站点具有持久化授权cookie或者受害者具有当前会话cookie</li>
+<li>目标站点没有对用户在网站行为的第二授权</li>
+</ul>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate comment here</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Rardar WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Rardar Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+      <div id="bitcoin" style="display: inline-block">
+        <img id="bitcoin_qr" src="/images/bitcoin.png" alt="Rardar Bitcoin">
+        <p>Bitcoin</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSRF/" rel="tag"><i class="fa fa-tag"></i> CSRF</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/15/SQLMAP/" rel="next" title="SQLMAP">
+                <i class="fa fa-chevron-left"></i> SQLMAP
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+	<div>
+    
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+    
+    </div>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -393,6 +565,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -413,8 +589,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -429,7 +614,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -515,6 +700,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#csrf这个漏洞与xss漏洞的恩怨情仇，别看这两个漏洞只差几个字符，但他们的区别可是天差地别。"><span class="nav-number">1.</span> <span class="nav-text">csrf这个漏洞与xss漏洞的恩怨情仇，别看这两个漏洞只差几个字符，但他们的区别可是天差地别。</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#序言"><span class="nav-number"></span> <span class="nav-text">序言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Csrf漏洞"><span class="nav-number"></span> <span class="nav-text">Csrf漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Csrf漏洞分析"><span class="nav-number"></span> <span class="nav-text">Csrf漏洞分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#成因"><span class="nav-number"></span> <span class="nav-text">成因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#危害"><span class="nav-number"></span> <span class="nav-text">危害</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#示例"><span class="nav-number"></span> <span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number"></span> <span class="nav-text">总结</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -560,7 +761,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共1.4k字</span>
+  <span class="post-count">博客全站共8.2k字</span>
 </div>
         
 
@@ -674,6 +875,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

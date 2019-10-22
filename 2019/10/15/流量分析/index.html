@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="npm,hexo,github,">
+  <meta name="keywords" content="流量分析,">
 
 
 
@@ -86,18 +86,17 @@
 
 
 
-<meta name="description" content="文件目录  类别   编码  语言 设置">
-<meta name="keywords" content="npm,hexo,github">
+<meta name="keywords" content="流量分析">
 <meta property="og:type" content="article">
-<meta property="og:title" content="my-first-blog">
-<meta property="og:url" content="http://yoursite.com/2019/10/14/my-first-blog(2)/index.html">
+<meta property="og:title" content="流量分析">
+<meta property="og:url" content="http://yoursite.com/2019/10/15/流量分析/index.html">
 <meta property="og:site_name" content="信息安全">
-<meta property="og:description" content="文件目录  类别   编码  语言 设置">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-15T05:36:31.380Z">
+<meta property="og:image" content="c:%5CUsers%5C%E5%AD%99%E8%85%BE%E9%A3%9E%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1571450418761.png">
+<meta property="og:updated_time" content="2019-10-19T02:04:29.897Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="my-first-blog">
-<meta name="twitter:description" content="文件目录  类别   编码  语言 设置">
+<meta name="twitter:title" content="流量分析">
+<meta name="twitter:image" content="c:%5CUsers%5C%E5%AD%99%E8%85%BE%E9%A3%9E%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1571450418761.png">
 
 
 
@@ -127,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/10/14/my-first-blog(2)/">
+  <link rel="canonical" href="http://yoursite.com/2019/10/15/流量分析/">
 
 
 
 
 
-  <title>my-first-blog | 信息安全</title>
+  <title>流量分析 | 信息安全</title>
   
 
 
@@ -302,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/14/my-first-blog(2)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/15/流量分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Rardar">
@@ -319,7 +318,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">my-first-blog</h1>
+          <h1 class="post-title" itemprop="name headline">流量分析</h1>
         
 
         <div class="post-meta">
@@ -331,8 +330,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-14T13:00:07+08:00">
-                2019-10-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-15T11:24:57+08:00">
+                2019-10-15
               </time>
             
 
@@ -354,8 +353,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/搭建博客/" itemprop="url" rel="index">
-                    <span itemprop="name">搭建博客</span>
+                  <a href="/categories/流量分析/" itemprop="url" rel="index">
+                    <span itemprop="name">流量分析</span>
                   </a>
                 </span>
 
@@ -385,7 +384,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  12
+                  1.4k
                 </span>
               
 
@@ -401,7 +400,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  5
                 </span>
               
             </div>
@@ -422,10 +421,46 @@
       
 
       
-        <p>文件目录  类别   编码  语言 设置</p>
-<hr>
-<hr>
-<hr>
+        <hr>
+<a id="more"></a>
+
+<h3 id="流量分析一般过程"><a href="#流量分析一般过程" class="headerlink" title="流量分析一般过程"></a>流量分析一般过程</h3><ul>
+<li><p>如果企业内网受到恶意软件感染，从流量上应该如何分析感染过程？确定内网中的感染情况</p>
+</li>
+<li><p><strong>已知自身的网络环境</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">局域网范围 191.168.1.0/24 （即191.168.1.0到191.168.1.255） </span><br><span class="line">局域网网关 191.168.1.1 </span><br><span class="line">局域网广播地址 191.168.1.255</span><br><span class="line">域 timbershade.info</span><br><span class="line">域控制器 191.168.1.2 – Timbershade-DC</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>需要解决的问题</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">被感染的Windows主机的IP地址是什么？</span><br><span class="line">被感染的Windows主机的MAC地址是什么？</span><br><span class="line">被感染的Windows主机的计算机名是什么？</span><br><span class="line">被感染的Windows主机的用户的帐户名是什么？</span><br><span class="line">发送到被感染的Windows主机的可执行文件的SHA256文件<span class="built_in">hash</span>是什么？</span><br><span class="line">参考IDS警报，这是什么类型的感染?</span><br></pre></td></tr></table></figure>
+
+<h3 id="步骤1-确定分析目标的ip"><a href="#步骤1-确定分析目标的ip" class="headerlink" title="步骤1 确定分析目标的ip"></a>步骤1 确定分析目标的ip</h3><p>使用Statistics菜单选项</p>
+<p>已经知道局域网的ip范围是191.168.1.0/24（即191.168.1.0到191.168.1.255），如果，Conversations中看到只有一个IP地址191.168.1.109既不是域控制器(191.168.1.2)也不是广播地址(191.168.1.255)。另外，IDS警报文件只显示了191.168.1.109这个ip的警报。</p>
+</li>
+</ul>
+<h3 id="步骤2-查找IP地址与MAC地址和计算机名关联关系"><a href="#步骤2-查找IP地址与MAC地址和计算机名关联关系" class="headerlink" title="步骤2 查找IP地址与MAC地址和计算机名关联关系"></a>步骤2 查找IP地址与MAC地址和计算机名关联关系</h3><p>​        <strong>方法一：通过DHCP协议查看</strong></p>
+<p>​        DHCP（Dynamic Host Configuration Protocol，动态主机配置协议）通常被应用在大型的局域        网络环境中，主要作用是集中的管理、分配IP地址，使网络环境中的主机动态的获得IP地址、        Gateway地址、DNS服务器地址等信息，并能够提升地址的使用率。</p>
+<pre><code>可以通过查看DHCP流量(过滤语法:bootp)将IP地址、MAC地址和计算机名，三者关联起来。 
+
+**方法二：通过NetBIOS协议查看** </code></pre><p>​        根据NetBIOS / NBNS – Wireshark Wiki，NetBIOS名字服务 即 NetBIOS Name Service                   (NBNS）是 NetBIOS-over-TCP协议套件的一部分，此服务通常在Windows系统上称为WINS         (Windows Internet Name Service) 。 传输协议：通常NBNS使用UDP作为其传输协议。众所周        知的NBNS流量UDP端口是137。（NBNS也可以使用TCP作为其某些操作的传输协议，尽管在实        践中可能永远不会这样做，TCP端口是137）。 WINS (Windows Internet Name Service)：名字        服务，功能包括名字注册和名字解析，简单的说这里的名字解析功能，NBNS（windows下称为        WINS）将“NetBIOS名字”转换为ip地址。 WINS提供了一个分布式的动态更新的数据库，能在路        由网络的环境中动态地对IP地址和NETBios名的映射进行注册与查询。 WINS用来注册“NetBIOS        计算机名”，并在需要时将它解析成为IP地址。（其实这个功能比较像DNS协议，它们都是将人类        可读的名称转换为IP地址）</p>
+<p>​        可以通过查看 NBNS流量(过滤语法:NBNS)一样能得到“IP地址与MAC地址和计算机名关联关系”。 </p>
+<h3 id="步骤3-查找Windows用户的帐户名"><a href="#步骤3-查找Windows用户的帐户名" class="headerlink" title="步骤3 查找Windows用户的帐户名"></a>步骤3 查找Windows用户的帐户名</h3><pre><code>使用以下Wireshark过滤语法:</code></pre><p>​         kerberos.CNameString and !(kerberos.CNameString contains $)</p>
+<p>​        看到kerberos.CNameString为margaret.dunn，得到了Windows用户的帐户名：                                       margaret.dunn。</p>
+<p>​        为什么kerberos协议的流量中有Windows用户的帐户名？</p>
+<p>​        原理：</p>
+<p>​        因为Kerberos认证过程中，客户机用户以明文方式发送AS-REQ（认证请求）到密钥分发中心        KDC（Key Distribution Center）以向AS（ Authentication Server）认证服务进行认证，要求得        到某服务器的证书。</p>
+<p>​        AS-REQ（认证请求）中包含Windows用户的帐户名，所以可以从流量中的AS-REQ（认证请求）        中找到Windows用户的帐户名。</p>
+<h3 id="步骤4-确定威胁类型"><a href="#步骤4-确定威胁类型" class="headerlink" title="步骤4 确定威胁类型"></a>步骤4 确定威胁类型</h3><p>​        使用 EmergingThreats (ET) 规则集，从 IDS（Security Onion的Sguil）发现的这些警报。</p>
+<p>​        根据IDS警报，可以看到警报列表中最下面的警报为: ET TROJAN ABUSE.CH SSL Blacklist                        Malicious SSL certificate detected (Dridex)</p>
+<p>​        Dridex的ssl证书被IDS黑名单规则匹配到，所以应该是Dridex感染。</p>
+<p>​        可以看到在IDS警报列表最下面这些“dridex证书警报”之前，有个“可执行文件下载”的警报，可得        出Windows EXE或DLL文件是从91.121.30.169的TCP端口8000下载的，需要从流量中提取这个样        本文件。</p>
+<h3 id="步骤5-提取样本文件"><a href="#步骤5-提取样本文件" class="headerlink" title="步骤5 提取样本文件"></a><strong>步骤5 提取样本文件</strong></h3><p>​        在wireshark中菜单 File → Export Objects → HTTP ，可以找到一些对分析有意义的文件，如压        缩文件、文本文件、音频文件、图片等。</p>
+<p>​        在导出这些文件之前，怎么判断哪个是Windows可执行文件呢? Follow 这个HTTP请求的TCP流，        可以从3处发现特征可以确定Windows可执行文件（exe或dll），如下图所示。  </p>
+<p>​        请求头中包含有：</p>
+<p>​        <img src="C:%5CUsers%5C%E5%AD%99%E8%85%BE%E9%A3%9E%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1571450418761.png" alt="1571450418761"></p>
+<p>​         从pcap提取到了恶意样本文件。 </p>
+<p>​         现在可以自己计算hash，也可以顺手提交给VirusTotal获得更多有关它的信息、IoC等。 </p>
+<p>​         简介：Dridex是一种专门针对银行的恶意软件，它利用Microsoft Office中的宏来感染系统。一        旦计算机被感染，Dridex攻击者就可以窃取系统上的银行凭据和其他个人信息，以访问用户的财        务记录。 </p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>​        流量分析作为企业网络安全防御体系的重要的一部分，与日志分析等相结合，尽可能完整还原恶        意软件攻击过程，这样才有可能将恶意软件从企业网络中彻底清理，同时对流量特征进行分析，        可得到并整理出IoC、相关样本文件、甚至是写出一份完整的分析报告。</p>
 
       
     </div>
@@ -477,11 +512,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/npm/" rel="tag"><i class="fa fa-tag"></i> npm</a>
-          
-            <a href="/tags/hexo/" rel="tag"><i class="fa fa-tag"></i> hexo</a>
-          
-            <a href="/tags/github/" rel="tag"><i class="fa fa-tag"></i> github</a>
+            <a href="/tags/流量分析/" rel="tag"><i class="fa fa-tag"></i> 流量分析</a>
           
         </div>
       
@@ -494,8 +525,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/10/14/my-first-blog(1)/" rel="next" title="my-first-blog">
-                <i class="fa fa-chevron-left"></i> my-first-blog
+              <a href="/2019/10/15/sql注入/" rel="next" title="SQL注入">
+                <i class="fa fa-chevron-left"></i> SQL注入
               </a>
             
           </div>
@@ -504,8 +535,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/10/14/极限加固/" rel="prev" title="极限加固">
-                极限加固 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/10/15/XSS（跨站脚本攻击）/" rel="prev" title="XSS（跨站脚本攻击）">
+                XSS（跨站脚本攻击） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -567,8 +598,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -583,7 +623,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -669,6 +709,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#流量分析一般过程"><span class="nav-number">1.</span> <span class="nav-text">流量分析一般过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤1-确定分析目标的ip"><span class="nav-number">2.</span> <span class="nav-text">步骤1 确定分析目标的ip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤2-查找IP地址与MAC地址和计算机名关联关系"><span class="nav-number">3.</span> <span class="nav-text">步骤2 查找IP地址与MAC地址和计算机名关联关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤3-查找Windows用户的帐户名"><span class="nav-number">4.</span> <span class="nav-text">步骤3 查找Windows用户的帐户名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤4-确定威胁类型"><span class="nav-number">5.</span> <span class="nav-text">步骤4 确定威胁类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤5-提取样本文件"><span class="nav-number">6.</span> <span class="nav-text">步骤5 提取样本文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -714,7 +770,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共1.4k字</span>
+  <span class="post-count">博客全站共8.2k字</span>
 </div>
         
 
